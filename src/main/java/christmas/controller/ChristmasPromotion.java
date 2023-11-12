@@ -39,8 +39,7 @@ public class ChristmasPromotion {
 
 
     }
-
-
+    
 
     private int getVisitDate(){
         try {

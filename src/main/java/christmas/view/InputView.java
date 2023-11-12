@@ -25,24 +25,24 @@ public class InputView {
 
     public Map<String, Integer> getOrderMenu() {
         System.out.println(MESSAGE_INPUT_ORDER_MENU);
-
         String input = Console.readLine();
         String[] menuAndQuantity = input.split(",");
         return toSeparatedOrder(menuAndQuantity);
     }
     private Map<String,Integer> toSeparatedOrder(String[] menuAndQuantity){
         Map<String, Integer> orderMap = new LinkedHashMap<>();
+        Set<String> checkDuplicate = new HashSet<>();
 
-        for (String parts : menuAndQuantity) {
-            try {
-                Map.Entry<String, Integer> entry = parseMenuAndQuantity(parts);
-                orderMap.put(entry.getKey(), entry.getValue());
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException(ERROR_ORDER_MENU+"인풋오류");
+        for (String part : menuAndQuantity) {
+            Map.Entry<String, Integer> parsedEntry = parseMenuAndQuantity(part.trim());
+            if (!checkDuplicate.add(parsedEntry.getKey())) {
+                throw new IllegalArgumentException(ERROR_ORDER_MENU);
             }
+            orderMap.put(parsedEntry.getKey(), parsedEntry.getValue());
         }
         return orderMap;
     }
+
     private Map.Entry<String, Integer> parseMenuAndQuantity(String menuAndQuantity) {
         String[] parts = menuAndQuantity.trim().split("-");
         if (parts.length < 2) {
