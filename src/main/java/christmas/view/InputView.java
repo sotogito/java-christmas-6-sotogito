@@ -24,7 +24,7 @@ public class InputView {
     }
 
     public Map<String, Integer> getOrderMenu() {
-        System.out.println(MESSAGE_INPUT_ORDER_MENU);
+        System.out.print(MESSAGE_INPUT_ORDER_MENU);
         String input = Console.readLine();
         String[] menuAndQuantity = input.split(",");
         return toSeparatedOrder(menuAndQuantity);
@@ -58,10 +58,6 @@ public class InputView {
         return new AbstractMap.SimpleEntry<>(menu, quantity);
     }
 
-
-    private String inputData() {
-        return Console.readLine();
-    }
 
     public static void introEventPlaner() {
         System.out.print(MESSAGE_INTRO_EVENT_PLANNER);

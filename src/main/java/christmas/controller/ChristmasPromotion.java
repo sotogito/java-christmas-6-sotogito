@@ -12,21 +12,17 @@ public class ChristmasPromotion {
     InputView inputView = new InputView();
 
     public void startPlaning(){
-        /*
-        Map<Category, List<MenuItem>> immutableMenu = Menu.getMenu();
-        for (Map.Entry<Category, List<MenuItem>> entry : immutableMenu.entrySet()) {
-            System.out.println(entry.getKey()); // 카테고리 출력
-            List<MenuItem> items = entry.getValue();
-            for (MenuItem item : items) {
-                System.out.println(item.getName() + " - " + item.getPrice() + "원"); // 메뉴 이름과 가격 출력
-            }
-        }
-
-         */
+        int visitDate = getVisitDate();
+        sendMenuListToView();
+        OrderManager orderManager = getOrderMenu(); //여기문제
 
 
-        int viditDate = getVisitDate();
-        OrderManager orderManager = getOrderMenu();
+        sendIntroPreviewToView(visitDate);
+
+
+
+
+    /*
 
         Map<Category, Integer> immutableMenu = orderManager.getOrderCategoryAndQuantity();
         for (Map.Entry<Category,Integer> entry : orderManager.getOrderCategoryAndQuantity().entrySet()) {
@@ -37,9 +33,11 @@ public class ChristmasPromotion {
             System.out.println(entry.getKey().getName()+" "+entry.getValue()+"개");
         }
 
+     */
+
 
     }
-    
+
 
     private int getVisitDate(){
         try {
@@ -59,32 +57,18 @@ public class ChristmasPromotion {
             OutputView.printErrorMessage(e.getMessage());
             return getOrderMenu();
         }
-
-
+    }
+    private void sendIntroPreviewToView(int visitDate){
+        OutputView.printIntroPreviewToView(visitDate);
+    }
+    private void sendMenuListToView(){
+        for (Map.Entry<Category, List<MenuItem>> menu : Menu.getMenu().entrySet()) {
+            System.out.println(menu.getKey().name());
+            OutputView.printMenuList(menu.getKey(),menu.getValue());
+        }
     }
 
-    private void getComplimentaryItem(){
 
-    }
-
-    private void getTotalAmountBeforeDiscount(){
-
-    }
-    private void getBenefitDetails(){
-
-    }
-
-    private void getTotalDiscountAmount(){
-
-    }
-
-    private void getEstimatedAmountAfterDiscount(){
-
-    }
-
-    private void getEventBadge(){
-
-    }
 
 
 }
