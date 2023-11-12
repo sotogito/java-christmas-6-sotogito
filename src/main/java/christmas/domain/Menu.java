@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.view.InputView;
+
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -42,6 +44,24 @@ public class Menu {
         BEVERAGE.add(new MenuItem("샴페인",25000));
 
     }
+
+
+    public static MenuItem findMenuItem(String orderMenuName) {
+        return menu.values().stream()
+                .flatMap(List::stream)
+                .filter(item -> item.getName().equals(orderMenuName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(InputView.ERROR_ORDER_MENU));
+    }
+
+    public static Category findCategory(MenuItem orderMenuItem) {
+        return menu.entrySet().stream()
+                .filter(entry -> entry.getValue().contains(orderMenuItem))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse(null);
+    }
+
 
     public static Map<Category, List<MenuItem>> getMenu() {
         Map<Category, List<MenuItem>> immutableMenu = new EnumMap<>(Category.class);

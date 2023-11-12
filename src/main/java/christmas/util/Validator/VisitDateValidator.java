@@ -10,7 +10,7 @@ public class VisitDateValidator {
 
     public static void visitDateValidator(int date) {
         if(!isWithinRangeNum(date)){
-            throw new IllegalArgumentException(ERROR_VISIT_DATE);
+            throw new IllegalArgumentException(ERROR_VISIT_DATE+"벨리데이터");
         }
     }
 
