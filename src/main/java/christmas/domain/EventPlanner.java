@@ -16,11 +16,12 @@ public class EventPlanner {
     private int amountToDiscount; //샴페인 금액 포함 안됨
 
     public EventPlanner(DailyDiscountItem dayOfWeek,Map<Category, Integer> orderCategory) {
-        //MoneyManager에서 만약 1000우ㅕㅓㄴ이 안 넘는 경우 임의로 값을 설정함
-        //DailyDiscount에 NOTHING추가하기
         discountData = dayOfWeek;
         this.orderCategory = orderCategory;
-        //discountData = ScheduleManager.getDayOfWeek(); //얘는 매개변수로 넣을
+
+        if(!MoneyManager.isWithinRangeAmount()){
+            discountData = DailyDiscountItem.NOTHING;
+        }
 
     }
 
