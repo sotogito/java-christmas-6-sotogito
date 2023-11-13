@@ -77,7 +77,7 @@ public class Menu {
                 .filter(item -> item.getName().equals(orderMenuName))
                 .mapToInt(MenuItem::getPrice) // Item 객체에서 가격을 얻습니다.
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(InputView.ERROR_ORDER_MENU));
+                .orElseThrow(() -> new IllegalArgumentException(InputView.ERROR_ORDER_MENU+"whswo"));
 
     }
 
