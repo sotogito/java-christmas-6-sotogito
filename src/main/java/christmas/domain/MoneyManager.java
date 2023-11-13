@@ -6,4 +6,14 @@ public class MoneyManager {
     public MoneyManager(int totalOrderAmount) {
         this.totalOrderAmount = totalOrderAmount;
     }
+
+    public int getTotalOrderAmount(){
+        return totalOrderAmount;
+    }
+
+    public int getTotalAmountAfterDiscount(int discount){
+        return totalOrderAmount - discount;
+    }
+
+
 }
