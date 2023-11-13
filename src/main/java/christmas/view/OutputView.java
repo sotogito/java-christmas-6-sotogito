@@ -53,7 +53,13 @@ public class OutputView {
         for (Map.Entry<String, Integer> entry : orderMenuAndQuantity.entrySet()) {
             String MSG = String.format(MESSAGE_ORDER_MENU_LIST, entry.getKey(), entry.getValue());
             System.out.print(MSG);
-        }
 
+        }
+    }
+
+    public static void printAmountBeforeDiscount(int amount){
+        System.out.println("\n<할인 전 총주문 금액>");
+        String amountFormatted = String.format("%,d\n", amount);
+        System.out.println(amountFormatted);
     }
 }

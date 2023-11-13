@@ -17,6 +17,8 @@ public class ChristmasPromotion {
         OrderManager orderManager = getOrderMenu(); //여기문제
         sendIntroPreviewToView(visitDate);
         sendOrderListToView(orderManager);
+        sendAmountBeforeDiscountToView(orderManager);
+
 
 
 
@@ -62,6 +64,10 @@ public class ChristmasPromotion {
     private void sendOrderListToView(OrderManager orderManager){
         Map<String,Integer> orderMenuAndQuantity = orderManager.getOrderMenuAndQuantity();
         OutputView.printOrderMenu(orderMenuAndQuantity);
+    }
+    private void sendAmountBeforeDiscountToView(OrderManager orderManager){
+        OutputView.printAmountBeforeDiscount(orderManager.getTotalOrderAmount());
+
     }
 
 
