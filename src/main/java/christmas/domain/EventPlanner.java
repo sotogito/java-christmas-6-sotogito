@@ -19,13 +19,6 @@ public class EventPlanner {
         this.orderCategory = orderCategory;
         discountData = ScheduleManager.getDayOfWeek();
 
-        for (Map.Entry<Category, Integer> entry : orderCategory.entrySet()) {
-            if(entry.getKey().getName() == discountData.getDiscountMenu()){
-                System.out.println(entry.getKey()+":"+entry.getValue());
-            }
-        }
-
-
     }
 
     public int getWeekdayDiscount(){
@@ -50,13 +43,7 @@ public class EventPlanner {
     }
     public int getSpecialDiscount(){
         int discount = discountData.getSpecialDiscount();
-        int discountAmount = 0;
-        for (Map.Entry<Category, Integer> entry : orderCategory.entrySet()){
-            if(discountData.getDiscountMenu() == entry.getKey().getName()){
-                discountAmount = discount * entry.getValue();
-            }
-        }
-        return discountAmount;
+        return discount;
     }
 
 
