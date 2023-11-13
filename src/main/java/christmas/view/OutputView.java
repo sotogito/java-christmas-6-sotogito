@@ -16,19 +16,20 @@ public class OutputView {
         System.out.print("[ERROR] " + error);
     }
 
-    public static void printIntroPreviewToView(int visitDate){
+    public static void printIntroPreviewToView(int visitDate) {
         String MSG = String.format(MESSAGE_INTRO_PREVIEW, visitDate);
         System.out.println(MSG);
 
     }
-    public static void printMenuList(Category categorys, List<MenuItem> menus){
-        String category = "<"+categorys.getName()+">";
+
+    public static void printMenuList(Category categorys, List<MenuItem> menus) {
+        String category = "<" + categorys.getName() + ">";
         String menuList = "";
 
-        for(int i = 0; i<menus.size(); i++){
-            menuList +=  menus.get(i).getName();
-            menuList += "("+String.format("%,d",menus.get(i).getPrice())+")";
-            if(i<menus.size()-1){
+        for (int i = 0; i < menus.size(); i++) {
+            menuList += menus.get(i).getName();
+            menuList += "(" + String.format("%,d", menus.get(i).getPrice()) + ")";
+            if (i < menus.size() - 1) {
                 menuList += ", ";
             }
         }

@@ -1,8 +1,6 @@
 package christmas.domain;
 
-import christmas.util.Validator.MoneyValidator;
 import christmas.util.Validator.OrderMenuValidator;
-import christmas.view.OutputView;
 
 import java.util.*;
 
@@ -24,12 +22,19 @@ public class OrderManager { //이벤트 계산에 필요한 데이터
             int quantity = entry.getValue();
             quantityCount += quantity;
             MenuItem menuItem = Menu.findMenuItem(menu);
-            totalOrderAmount += menuItem.getPrice();
+            //totalOrderAmount += menuItem.getPrice()*quantity; //역시 3개 분리해야될듯
+
+            totalOrderAmount += Menu.findOrderMenuAndReturnPrice(menu)*quantity;
             orderMenu.put(menuItem, quantity);
+
+
             orderCategory.merge(Menu.findCategory(menuItem), quantity, Integer::sum);
+
+
+
         }
         validate(quantityCount);
-
+        System.out.println(totalOrderAmount);
 
     }
 

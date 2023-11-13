@@ -29,7 +29,8 @@ public class InputView {
         String[] menuAndQuantity = input.split(",");
         return toSeparatedOrder(menuAndQuantity);
     }
-    private Map<String,Integer> toSeparatedOrder(String[] menuAndQuantity){
+
+    private Map<String, Integer> toSeparatedOrder(String[] menuAndQuantity) {
         Map<String, Integer> orderMap = new LinkedHashMap<>();
         Set<String> checkDuplicate = new HashSet<>();
 

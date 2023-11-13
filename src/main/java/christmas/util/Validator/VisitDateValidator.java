@@ -9,13 +9,13 @@ public class VisitDateValidator {
 
 
     public static void visitDateValidator(int date) {
-        if(!isWithinRangeNum(date)){
-            throw new IllegalArgumentException(ERROR_VISIT_DATE+"벨리데이터");
+        if (!isWithinRangeNum(date)) {
+            throw new IllegalArgumentException(ERROR_VISIT_DATE);
         }
     }
 
     private static boolean isWithinRangeNum(int date) {
-        if(date>=MIN && date<=MAX){
+        if (date >= MIN && date <= MAX) {
             return true;
         }
         return false;
