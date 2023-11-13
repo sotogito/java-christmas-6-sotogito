@@ -16,12 +16,15 @@ public class ChristmasPromotion {
         sendMenuListToView();
         OrderManager orderManager = getOrderMenu(); //여기문제
         MoneyManager moneyManager = getAmountBeforeDiscount(orderManager);
-        EventPlanner eventPlanner = new EventPlanner(orderManager.getOrderCategoryAndQuantity());
+        EventPlanner eventPlanner = runEventPlanner(scheduleManager,orderManager);
 
 
         System.out.println(eventPlanner.getWeekdayDiscount()+"평일할인");
         System.out.println(eventPlanner.getWeekendDiscount()+"주말할인");
         System.out.println(eventPlanner.getSpecialDiscount()+"스페셩할인");
+        eventPlanner.getComplimentaryMenu(moneyManager.getTotalOrderAmount());
+        System.out.println(eventPlanner.getAmountToDiscount());
+        System.out.println(eventPlanner.getTotalDiscountAmount());
 
         sendComplimentaryMenuToView();
 
@@ -65,6 +68,12 @@ public class ChristmasPromotion {
     private MoneyManager getAmountBeforeDiscount(OrderManager orderManager){
         int amountBeforeDiscount =orderManager.getTotalOrderAmount();
         return new MoneyManager(amountBeforeDiscount);
+
+    }
+    private EventPlanner runEventPlanner(ScheduleManager scheduleManager,OrderManager orderManager){
+        DailyDiscountItem dayOfWeek = scheduleManager.getDayOfWeek();
+        Map<Category, Integer> orderCategory = orderManager.getOrderCategoryAndQuantity();
+        return new EventPlanner(dayOfWeek,orderCategory);
 
     }
 

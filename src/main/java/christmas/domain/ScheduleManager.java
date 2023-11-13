@@ -18,7 +18,7 @@ public class ScheduleManager {
         this.visitDate = visitDate;
     }
 
-    public static DailyDiscountItem getDayOfWeek(){
+    public DailyDiscountItem getDayOfWeek(){
         if(visitDate == 25){
             return DailyDiscountItem.CHRISTMAS;
         }

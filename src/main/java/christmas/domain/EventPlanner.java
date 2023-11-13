@@ -13,11 +13,14 @@ public class EventPlanner {
     private Map<Category, Integer> orderCategory = new EnumMap<Category, Integer>(Category.class);
     DailyDiscountItem discountData;
     private boolean canComplimentary;
-    private int discountAmount;
+    private int amountToDiscount; //샴페인 금액 포함 안됨
 
-    public EventPlanner(Map<Category, Integer> orderCategory) {
+    public EventPlanner(DailyDiscountItem dayOfWeek,Map<Category, Integer> orderCategory) {
+        //MoneyManager에서 만약 1000우ㅕㅓㄴ이 안 넘는 경우 임의로 값을 설정함
+        //DailyDiscount에 NOTHING추가하기
+        discountData = dayOfWeek;
         this.orderCategory = orderCategory;
-        discountData = ScheduleManager.getDayOfWeek();
+        //discountData = ScheduleManager.getDayOfWeek(); //얘는 매개변수로 넣을
 
     }
 
@@ -29,6 +32,7 @@ public class EventPlanner {
                 discountAmount = discount * entry.getValue();
             }
         }
+        amountToDiscount += discountAmount;
         return discountAmount;
     }
     public int getWeekendDiscount(){
@@ -39,10 +43,12 @@ public class EventPlanner {
                 discountAmount = discount * entry.getValue();
             }
         }
+        amountToDiscount += discountAmount;
         return discountAmount;
     }
     public int getSpecialDiscount(){
         int discount = discountData.getSpecialDiscount();
+        amountToDiscount += discount;
         return discount;
     }
 
@@ -72,6 +78,7 @@ public class EventPlanner {
         Map<String,Integer> complimentary = new LinkedHashMap<>();
         if(amount>=CAN_COMPLIMENTARY_MIN){
             complimentary.put(COMPLIMENTARY_MENU,COMPLIMENTARY_QUANTITY);
+            System.out.println("넘어");
             canComplimentary = true;
         }
         else if(amount<CAN_COMPLIMENTARY_MIN){
@@ -80,10 +87,14 @@ public class EventPlanner {
         return complimentary;
     }
 
-    public int getTotalDiscountAmount(){ //총혜택금액 +샴페인 금액
+    public int getTotalDiscountAmount(){ //총혜택금액 +샴페인 금액 <총혜택금액>
         if(canComplimentary){
-            return discountAmount += Menu.findOrderMenuAndReturnPrice(COMPLIMENTARY_MENU);
+            return amountToDiscount += Menu.findOrderMenuAndReturnPrice(COMPLIMENTARY_MENU);
         }
-        return discountAmount;
+        return amountToDiscount;
+    }
+
+    public int getAmountToDiscount(){ //할인 후 예상 금액에 필요한 금액
+        return amountToDiscount;
     }
 }
