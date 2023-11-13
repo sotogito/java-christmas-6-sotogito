@@ -16,24 +16,17 @@ public class ChristmasPromotion {
         sendMenuListToView();
         OrderManager orderManager = getOrderMenu(); //여기문제
         sendIntroPreviewToView(visitDate);
+        sendOrderListToView(orderManager);
 
 
 
-
-
-
-
+        /*
         Map<Category, Integer> immutableMenu = orderManager.getOrderCategoryAndQuantity();
         for (Map.Entry<Category,Integer> entry : orderManager.getOrderCategoryAndQuantity().entrySet()) {
             System.out.println(entry.getKey()+"카테고리 출력"+entry.getValue());
         }
-        System.out.println("<주문 메뉴>");
-        for(Map.Entry<String,Integer> entry : orderManager.getOrderMenuAndQuantity().entrySet()){
-            System.out.println(entry.getKey() +" " +entry.getValue()+"개");
-        }
 
-
-
+         */
 
 
     }
@@ -66,8 +59,9 @@ public class ChristmasPromotion {
             OutputView.printMenuList(menu.getKey(),menu.getValue());
         }
     }
-    private void sendOrderListToView(){
-
+    private void sendOrderListToView(OrderManager orderManager){
+        Map<String,Integer> orderMenuAndQuantity = orderManager.getOrderMenuAndQuantity();
+        OutputView.printOrderMenu(orderMenuAndQuantity);
     }
 
 
