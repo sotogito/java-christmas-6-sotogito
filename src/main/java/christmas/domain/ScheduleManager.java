@@ -28,6 +28,11 @@ public class ScheduleManager {
         return DailyDiscountItem.getDayOfWeek(dayOfWeek);
     }
 
+    public int calculateDDay(){
+        return visitDate - D_DAY_DISCOUNT_MIN;
+    }
+
+
     public int getVisitDate(){
         return visitDate;
     }

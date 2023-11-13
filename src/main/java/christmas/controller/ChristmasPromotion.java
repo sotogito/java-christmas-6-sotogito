@@ -19,6 +19,8 @@ public class ChristmasPromotion {
         EventPlanner eventPlanner = runEventPlanner(scheduleManager,orderManager);
 
 
+        int date = scheduleManager.calculateDDay();
+        System.out.println(eventPlanner.getDDayDiscount(date)+"디데이할인");
         System.out.println(eventPlanner.getWeekdayDiscount()+"평일할인");
         System.out.println(eventPlanner.getWeekendDiscount()+"주말할인");
         System.out.println(eventPlanner.getSpecialDiscount()+"스페셩할인");

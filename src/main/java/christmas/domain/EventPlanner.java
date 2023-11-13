@@ -10,6 +10,9 @@ public class EventPlanner {
     private static final int CAN_COMPLIMENTARY_MIN = 120000;
     private static final String COMPLIMENTARY_MENU = "샴페인";
     private static final int COMPLIMENTARY_QUANTITY = 1;
+    private static final int D_DAY_DISCOUNT_BASIC_AMOUNT = 1000;
+    private static final int D_DAY_DISCOUNT_ADD_AMOUNT = 100;
+    private static int D_DAY_DISCOUNT_ERROR_CONSTANT = 1;
     private Map<Category, Integer> orderCategory = new EnumMap<Category, Integer>(Category.class);
     DailyDiscountItem discountData;
     private boolean canComplimentary;
@@ -21,9 +24,18 @@ public class EventPlanner {
 
         if(!MoneyManager.isWithinRangeAmount()){
             discountData = DailyDiscountItem.NOTHING;
+            D_DAY_DISCOUNT_ERROR_CONSTANT = 0;
         }
 
     }
+    public int getDDayDiscount(int date){
+        int discountAmount = D_DAY_DISCOUNT_BASIC_AMOUNT;
+        discountAmount += date*D_DAY_DISCOUNT_ADD_AMOUNT;
+        amountToDiscount+=discountAmount*D_DAY_DISCOUNT_ERROR_CONSTANT;
+        return discountAmount*D_DAY_DISCOUNT_ERROR_CONSTANT;
+    }
+
+
 
     public int getWeekdayDiscount(){
         int discount = discountData.getWeekdayDiscount();
@@ -54,32 +66,10 @@ public class EventPlanner {
     }
 
 
-
-
-    private int getDiscountAmount(Category category, Map<Category, Integer> orderCategory) {
-        int discountAmount = 0;
-        for (Map.Entry<Category, Integer> entry : orderCategory.entrySet()) {
-            if (entry.getKey() == category) {
-                discountAmount += 2023 * entry.getValue();
-            }
-        }
-        return discountAmount;
-        //만약 금액이 1000원 이하면 그냥 바로 0원을 반환
-
-    }
-
-
-
-
-
-
-
-
     public Map<String,Integer> getComplimentaryMenu(int amount){ //샴페인
         Map<String,Integer> complimentary = new LinkedHashMap<>();
         if(amount>=CAN_COMPLIMENTARY_MIN){
             complimentary.put(COMPLIMENTARY_MENU,COMPLIMENTARY_QUANTITY);
-            System.out.println("넘어");
             canComplimentary = true;
         }
         else if(amount<CAN_COMPLIMENTARY_MIN){
