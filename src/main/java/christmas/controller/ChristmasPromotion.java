@@ -18,23 +18,34 @@ public class ChristmasPromotion {
         MoneyManager moneyManager = getAmountBeforeDiscount(orderManager);
         EventPlanner eventPlanner = runEventPlanner(scheduleManager,orderManager);
 
-
+        /*
         int date = scheduleManager.calculateDDay();
         System.out.println(eventPlanner.getDDayDiscount(date)+"디데이할인");
         System.out.println(eventPlanner.getWeekdayDiscount()+"평일할인");
         System.out.println(eventPlanner.getWeekendDiscount()+"주말할인");
         System.out.println(eventPlanner.getSpecialDiscount()+"스페셩할인");
+        //EnumMap으로 넣어서 출력
         eventPlanner.getComplimentaryMenu(moneyManager.getTotalOrderAmount());
         System.out.println(eventPlanner.getAmountToDiscount());
         System.out.println(eventPlanner.getTotalDiscountAmount());
+        */
 
-        sendComplimentaryMenuToView();
 
 
+        System.out.println("-------------------");
 
         sendIntroPreviewToView(scheduleManager);
         sendOrderListToView(orderManager);
         sendAmountBeforeDiscountToView(moneyManager);
+        sendComplimentaryMenuToView(moneyManager,eventPlanner);
+        sendDiscountDetails(eventPlanner,scheduleManager);
+        //총혜택
+        //할인 후 예산 결제 금액
+        //12원 이벤트 배지
+        System.out.println(eventPlanner.getTotalDiscountAmount());
+        System.out.println(eventPlanner.getAmountToDiscount());
+        int total = moneyManager.getTotalOrderAmount()-eventPlanner.getAmountToDiscount();
+        System.out.println(total);
 
 
 
@@ -99,8 +110,19 @@ public class ChristmasPromotion {
         OutputView.printAmountBeforeDiscount(moneyManager.getTotalOrderAmount());
 
     }
-    private void sendComplimentaryMenuToView(){
+    private void sendComplimentaryMenuToView(MoneyManager moneyManager,EventPlanner eventPlanner){
+        int amount = moneyManager.getTotalOrderAmount();
+        Map<String,Integer> complimentaryMenu = eventPlanner.getComplimentaryMenu(amount);
+        OutputView.printComplimentaryMenu(complimentaryMenu);
 
+    }
+    private void sendDiscountDetails(EventPlanner eventPlanner,ScheduleManager scheduleManager ){
+        Boolean nothing = false;
+        if(!MoneyManager.isWithinRangeAmount()){
+            nothing = true;
+        }
+        DiscountDetail discountDetail = new DiscountDetail(eventPlanner,scheduleManager);
+        OutputView.printDiscountDetails(discountDetail.getDiscountDetails(),nothing);
     }
 
 
