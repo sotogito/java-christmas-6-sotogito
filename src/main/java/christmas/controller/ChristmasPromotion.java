@@ -13,7 +13,7 @@ public class ChristmasPromotion {
 
     public void startPlaning(){
         ScheduleManager scheduleManager = getVisitDate();
-        sendMenuListToView();
+        sendMenuList();
         OrderManager orderManager = getOrderMenu(); //여기문제
         MoneyManager moneyManager = getAmountBeforeDiscount(orderManager);
         EventPlanner eventPlanner = runEventPlanner(scheduleManager,orderManager);
@@ -34,11 +34,14 @@ public class ChristmasPromotion {
 
         System.out.println("-------------------");
 
-        sendIntroPreviewToView(scheduleManager);
-        sendOrderListToView(orderManager);
-        sendAmountBeforeDiscountToView(moneyManager);
-        sendComplimentaryMenuToView(moneyManager,eventPlanner);
+        sendIntroPreview(scheduleManager);
+        sendOrderList(orderManager);
+        sendAmountBeforeDiscount(moneyManager);
+        sendComplimentaryMenu(moneyManager,eventPlanner);
         sendDiscountDetails(eventPlanner,scheduleManager);
+
+        sendAmount(moneyManager,eventPlanner);
+
         //총혜택
         //할인 후 예산 결제 금액
         //12원 이벤트 배지
@@ -46,6 +49,7 @@ public class ChristmasPromotion {
         System.out.println(eventPlanner.getAmountToDiscount());
         int total = moneyManager.getTotalOrderAmount()-eventPlanner.getAmountToDiscount();
         System.out.println(total);
+        System.out.print(EventBadge.findBadgeForAmount(eventPlanner.getTotalDiscountAmount()));
 
 
 
@@ -94,23 +98,23 @@ public class ChristmasPromotion {
 
 
 
-    private void sendIntroPreviewToView(ScheduleManager scheduleManager){
+    private void sendIntroPreview(ScheduleManager scheduleManager){
         OutputView.printIntroPreviewToView(scheduleManager.getVisitDate());
     }
-    private void sendMenuListToView(){
+    private void sendMenuList(){
         for (Map.Entry<Category, List<MenuItem>> menu : Menu.getMenu().entrySet()) {
             OutputView.printMenuList(menu.getKey(),menu.getValue());
         }
     }
-    private void sendOrderListToView(OrderManager orderManager){
+    private void sendOrderList(OrderManager orderManager){
         Map<String,Integer> orderMenuAndQuantity = orderManager.getOrderMenuAndQuantity();
         OutputView.printOrderMenu(orderMenuAndQuantity);
     }
-    private void sendAmountBeforeDiscountToView(MoneyManager moneyManager){
+    private void sendAmountBeforeDiscount(MoneyManager moneyManager){
         OutputView.printAmountBeforeDiscount(moneyManager.getTotalOrderAmount());
 
     }
-    private void sendComplimentaryMenuToView(MoneyManager moneyManager,EventPlanner eventPlanner){
+    private void sendComplimentaryMenu(MoneyManager moneyManager,EventPlanner eventPlanner){
         int amount = moneyManager.getTotalOrderAmount();
         Map<String,Integer> complimentaryMenu = eventPlanner.getComplimentaryMenu(amount);
         OutputView.printComplimentaryMenu(complimentaryMenu);
@@ -123,6 +127,15 @@ public class ChristmasPromotion {
         }
         DiscountDetail discountDetail = new DiscountDetail(eventPlanner,scheduleManager);
         OutputView.printDiscountDetails(discountDetail.getDiscountDetails(),nothing);
+    }
+
+    private void sendAmount(MoneyManager moneyManager,EventPlanner eventPlanner){
+        int totalDiscountAmount = eventPlanner.getTotalDiscountAmount();
+        int discountedAmount = moneyManager.getTotalOrderAmount()-eventPlanner.getAmountToDiscount();
+        OutputView.printTotalDiscountAmount(totalDiscountAmount);
+        OutputView.printDiscountedAmount(discountedAmount);
+
+
     }
 
 

@@ -12,10 +12,7 @@ public class OutputView {
     private static final String MESSAGE_INTRO_PREVIEW = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n";
     private static final String NOTICE_INTRO_PREVIEW = "총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.\n";
     private static final String NOTICE_INTR_PREVIEW = "음료만 주문 시, 주문할 수 없습니다.\n";
-
     private static final String MESSAGE_D_DAY_DISCOUNT = "크리스마스 디데이 할인: -%s\n";
-
-
     private static final String MESSAGE_ORDER_MENU_LIST = "%s %d개\n";
     private static final String MESSAGE_PRICE = "%s원\n";
     private static final String MESSAGE_DISCOUNT_PRICE = "-%s원\n";
@@ -92,11 +89,32 @@ public class OutputView {
         for(Map.Entry<DiscountType,Integer> entry : details.entrySet()){
             if (entry.getValue() > 0) { //0원인건 출력하지 않음
                 String amountFormatted = String.format("%,d", entry.getValue());
-                String message = entry.getKey().getDescription() + ": ";
-                message += String.format(MESSAGE_DISCOUNT_PRICE, amountFormatted);
-                System.out.print(message);
+                String MSG = entry.getKey().getDescription() + ": ";
+                MSG += String.format(MESSAGE_DISCOUNT_PRICE, amountFormatted);
+                System.out.print(MSG);
             }
         }
+    }
+
+    public static void printTotalDiscountAmount(int totalDiscountAmount){
+        System.out.println("\n<총혜택 금액>");
+
+        String MSG = "";
+        String amountFormatted = String.format("%,d", totalDiscountAmount);
+        if(totalDiscountAmount<=0){
+            MSG = String.format(MESSAGE_PRICE, amountFormatted);
+        }else if(totalDiscountAmount>0){
+            MSG = String.format(MESSAGE_DISCOUNT_PRICE, amountFormatted);
+        }
+        System.out.print(MSG);
+    }
+    public static void printDiscountedAmount(int discountedAmount){
+        System.out.println("\n<할인 후 예상 결제 금액>");
+
+        String amountFormatted = String.format("%,d", discountedAmount);
+        String MSG = String.format(MESSAGE_PRICE, amountFormatted);
+        System.out.print(MSG);
+
     }
 
 
