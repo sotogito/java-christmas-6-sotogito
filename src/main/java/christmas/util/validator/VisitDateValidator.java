@@ -1,4 +1,4 @@
-package christmas.util.Validator;
+package christmas.util.validator;
 
 
 public class VisitDateValidator {

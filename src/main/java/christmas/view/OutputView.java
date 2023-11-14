@@ -1,8 +1,8 @@
 package christmas.view;
 
-import christmas.domain.Category;
-import christmas.domain.DiscountType;
-import christmas.domain.MenuItem;
+import christmas.domain.restaurant.Category;
+import christmas.domain.promotion.policy.DiscountType;
+import christmas.domain.restaurant.MenuItem;
 
 import java.util.List;
 import java.util.Map;

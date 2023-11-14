@@ -1,4 +1,9 @@
-package christmas.domain;
+package christmas.domain.promotion.policy;
+
+import christmas.domain.EventPlanner;
+import christmas.domain.manager.ScheduleManager;
+import christmas.domain.promotion.ComplimentaryItem;
+import christmas.domain.promotion.policy.DiscountType;
 
 import java.util.EnumMap;
 import java.util.Map;

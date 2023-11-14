@@ -1,7 +1,10 @@
-package christmas.domain;
+package christmas.domain.manager;
 
-import christmas.util.Validator.MoneyValidator;
-import christmas.util.Validator.OrderMenuValidator;
+import christmas.domain.restaurant.Category;
+import christmas.domain.restaurant.Menu;
+import christmas.domain.restaurant.MenuItem;
+import christmas.util.validator.MoneyValidator;
+import christmas.util.validator.OrderMenuValidator;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.restaurant;
 
 public enum Category {
     APPETIZER("애피타이저"),

@@ -1,4 +1,7 @@
-package christmas.domain;
+package christmas.domain.promotion;
+
+import christmas.domain.restaurant.Menu;
+import christmas.domain.restaurant.MenuItem;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

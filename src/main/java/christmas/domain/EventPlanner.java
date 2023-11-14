@@ -1,5 +1,11 @@
 package christmas.domain;
 
+import christmas.domain.manager.MoneyManager;
+import christmas.domain.manager.ScheduleManager;
+import christmas.domain.promotion.ComplimentaryItem;
+import christmas.domain.promotion.policy.DailyDiscountItem;
+import christmas.domain.restaurant.Category;
+
 import java.util.Map;
 
 public class EventPlanner {

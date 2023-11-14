@@ -1,6 +1,7 @@
-package christmas.domain;
+package christmas.domain.manager;
 
-import christmas.util.Validator.VisitDateValidator;
+import christmas.domain.promotion.policy.DailyDiscountItem;
+import christmas.util.validator.VisitDateValidator;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

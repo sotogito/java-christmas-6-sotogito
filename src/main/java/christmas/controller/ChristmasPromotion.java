@@ -1,6 +1,16 @@
 package christmas.controller;
 
 import christmas.domain.*;
+import christmas.domain.manager.MoneyManager;
+import christmas.domain.manager.OrderManager;
+import christmas.domain.manager.ScheduleManager;
+import christmas.domain.promotion.ComplimentaryItem;
+import christmas.domain.promotion.EventBadge;
+import christmas.domain.promotion.policy.DailyDiscountItem;
+import christmas.domain.promotion.policy.DiscountDetail;
+import christmas.domain.restaurant.Category;
+import christmas.domain.restaurant.Menu;
+import christmas.domain.restaurant.MenuItem;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 

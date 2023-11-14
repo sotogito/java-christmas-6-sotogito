@@ -1,6 +1,6 @@
-package christmas.util.Validator;
+package christmas.util.validator;
 
-import christmas.domain.Category;
+import christmas.domain.restaurant.Category;
 import christmas.view.InputView;
 
 import java.util.Map;

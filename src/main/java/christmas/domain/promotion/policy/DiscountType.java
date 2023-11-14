@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.promotion.policy;
 
 public enum DiscountType {
     CHRISTMAS_DDAY_DISCOUNT("크리스마스 디데이 할인"),

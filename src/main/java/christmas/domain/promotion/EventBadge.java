@@ -1,4 +1,6 @@
-package christmas.domain;
+package christmas.domain.promotion;
+
+import christmas.domain.manager.MoneyManager;
 
 public enum EventBadge {
     STAR("별", 5000),

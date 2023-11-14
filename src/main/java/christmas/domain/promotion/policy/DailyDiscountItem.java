@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.promotion.policy;
 
 import java.time.DayOfWeek;
 import java.util.Arrays;

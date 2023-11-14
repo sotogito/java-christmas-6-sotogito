@@ -1,4 +1,4 @@
-package christmas.util.Validator;
+package christmas.util.validator;
 
 public class MoneyValidator {
     private static int MIN_AMOUNT = 10000;
