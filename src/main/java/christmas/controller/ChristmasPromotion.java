@@ -17,6 +17,11 @@ public class ChristmasPromotion {
         MoneyManager moneyManager = getAmountBeforeDiscount(orderManager);
         EventPlanner eventPlanner = runEventPlanner(scheduleManager,orderManager);
 
+        planPrinter(scheduleManager,orderManager,moneyManager,eventPlanner);
+    }
+
+    private void planPrinter(
+            ScheduleManager scheduleManager,OrderManager orderManager,MoneyManager moneyManager,EventPlanner eventPlanner){
         sendIntroPreview(scheduleManager);
         sendOrderList(orderManager);
         sendAmountBeforeDiscount(moneyManager);
