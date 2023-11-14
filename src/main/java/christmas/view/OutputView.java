@@ -116,6 +116,11 @@ public class OutputView {
         System.out.print(MSG);
 
     }
+    public static void printEventBadge(String badge){
+        System.out.println("\n<12월 이벤트 배지>");
+
+        System.out.print(badge);
+    }
 
 
 

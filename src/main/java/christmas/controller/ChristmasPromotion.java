@@ -41,15 +41,11 @@ public class ChristmasPromotion {
         sendDiscountDetails(eventPlanner,scheduleManager);
 
         sendAmount(moneyManager,eventPlanner);
+        sendEventBadge(eventPlanner);
 
         //총혜택
         //할인 후 예산 결제 금액
         //12원 이벤트 배지
-        System.out.println(eventPlanner.getTotalDiscountAmount());
-        System.out.println(eventPlanner.getAmountToDiscount());
-        int total = moneyManager.getTotalOrderAmount()-eventPlanner.getAmountToDiscount();
-        System.out.println(total);
-        System.out.print(EventBadge.findBadgeForAmount(eventPlanner.getTotalDiscountAmount()));
 
 
 
@@ -132,10 +128,13 @@ public class ChristmasPromotion {
     private void sendAmount(MoneyManager moneyManager,EventPlanner eventPlanner){
         int totalDiscountAmount = eventPlanner.getTotalDiscountAmount();
         int discountedAmount = moneyManager.getTotalOrderAmount()-eventPlanner.getAmountToDiscount();
+
         OutputView.printTotalDiscountAmount(totalDiscountAmount);
         OutputView.printDiscountedAmount(discountedAmount);
-
-
+    }
+    private void sendEventBadge(EventPlanner eventPlanner){
+        String BadgeType = EventBadge.findBadgeForAmount(eventPlanner.getTotalDiscountAmount());
+        OutputView.printEventBadge(BadgeType);
     }
 
 
