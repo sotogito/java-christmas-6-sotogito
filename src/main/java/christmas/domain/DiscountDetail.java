@@ -11,7 +11,7 @@ public class DiscountDetail {
         int weekday = eventPlanner.getWeekdayDiscount();
         int weekend = eventPlanner.getWeekendDiscount();
         int special = eventPlanner.getSpecialDiscount();
-        int event = eventPlanner.getTotalDiscountAmount()-eventPlanner.getAmountToDiscount();
+        int event = ComplimentaryItem.getAmount();
 
         discountDetails.put(DiscountType.CHRISTMAS_DDAY_DISCOUNT,dDay);
         discountDetails.put(DiscountType.WEEKDAY_DISCOUNT,weekday);

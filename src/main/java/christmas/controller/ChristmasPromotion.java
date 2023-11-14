@@ -11,8 +11,8 @@ public class ChristmasPromotion {
     InputView inputView = new InputView();
 
     public void startPlaning(){
-        ScheduleManager scheduleManager = getVisitDate();
         sendMenuList();
+        ScheduleManager scheduleManager = getVisitDate();
         OrderManager orderManager = getOrderMenu();
         MoneyManager moneyManager = getAmountBeforeDiscount(orderManager);
         EventPlanner eventPlanner = runEventPlanner(scheduleManager,orderManager);
@@ -25,8 +25,11 @@ public class ChristmasPromotion {
         sendIntroPreview(scheduleManager);
         sendOrderList(orderManager);
         sendAmountBeforeDiscount(moneyManager);
-        sendComplimentaryMenu(moneyManager,eventPlanner);
+
+
+        sendComplimentaryMenu(moneyManager);
         sendDiscountDetails(eventPlanner,scheduleManager);
+
         sendAmount(moneyManager,eventPlanner);
         sendEventBadge(eventPlanner);
     }
@@ -68,6 +71,7 @@ public class ChristmasPromotion {
         for (Map.Entry<Category, List<MenuItem>> menu : Menu.getMenu().entrySet()) {
             OutputView.printMenuList(menu.getKey(),menu.getValue());
         }
+        OutputView.printNotice();
     }
     private void sendOrderList(OrderManager orderManager){
         Map<String,Integer> orderMenuAndQuantity = orderManager.getOrderMenuAndQuantity();
@@ -77,9 +81,9 @@ public class ChristmasPromotion {
         OutputView.printAmountBeforeDiscount(moneyManager.getTotalOrderAmount());
 
     }
-    private void sendComplimentaryMenu(MoneyManager moneyManager,EventPlanner eventPlanner){
+    private void sendComplimentaryMenu(MoneyManager moneyManager){
         int amount = moneyManager.getTotalOrderAmount();
-        Map<String,Integer> complimentaryMenu = eventPlanner.getComplimentaryMenu(amount);
+        Map<String,Integer> complimentaryMenu =ComplimentaryItem.getComplimentaryItem(amount);
         OutputView.printComplimentaryMenu(complimentaryMenu);
 
     }
@@ -92,9 +96,10 @@ public class ChristmasPromotion {
         OutputView.printDiscountDetails(discountDetail.getDiscountDetails(),nothing);
     }
 
+
     private void sendAmount(MoneyManager moneyManager,EventPlanner eventPlanner){
         int totalDiscountAmount = eventPlanner.getTotalDiscountAmount();
-        int discountedAmount = moneyManager.getTotalOrderAmount()-eventPlanner.getAmountToDiscount();
+        int discountedAmount = moneyManager.getDiscountedAmount(eventPlanner.getAmountToDiscount());
 
         OutputView.printTotalDiscountAmount(totalDiscountAmount);
         OutputView.printDiscountedAmount(discountedAmount);
@@ -103,6 +108,8 @@ public class ChristmasPromotion {
         String BadgeType = EventBadge.findBadgeForAmount(eventPlanner.getTotalDiscountAmount());
         OutputView.printEventBadge(BadgeType);
     }
+
+
 
 
 

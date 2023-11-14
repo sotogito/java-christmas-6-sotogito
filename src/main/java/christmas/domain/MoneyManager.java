@@ -16,7 +16,7 @@ public class MoneyManager {
         return totalOrderAmount>=MIN_AMOUNT;
     }
 
-    public int getTotalAmountAfterDiscount(int discount){
+    public int getDiscountedAmount(int discount){
         return totalOrderAmount - discount;
     }
 

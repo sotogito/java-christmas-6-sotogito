@@ -13,20 +13,20 @@ public enum DailyDiscountItem {
     FRI(DayOfWeek.FRIDAY, 0,2023, 0, "메인"),
     SAT(DayOfWeek.SATURDAY, 0,2023, 0, "메인"),
     CHRISTMAS(DayOfWeek.SATURDAY, 2023,0, 1000, "디저트"),
-    NOTHING(null, 0,0, 0, null);
+    NOTHING(null, 0,0, 0, "null");
 
     private final DayOfWeek dayOfWeek;
-    private final int weekdayDiscount;
-    private final int weekendDiscount;
-    private final int specialDiscount;
+    private final int weekday;
+    private final int weekend;
+    private final int special;
     private final String discountMenu;
 
     DailyDiscountItem(
-            DayOfWeek dayOfWeek, int weekdayDiscount, int weekendDiscount, int specialDiscount, String discountMenu) {
+            DayOfWeek dayOfWeek, int weekday, int weekend, int special, String discountMenu) {
         this.dayOfWeek = dayOfWeek;
-        this.weekdayDiscount =weekdayDiscount;
-        this.weekendDiscount = weekendDiscount;
-        this.specialDiscount = specialDiscount;
+        this.weekday =weekday;
+        this.weekend = weekend;
+        this.special = special;
         this.discountMenu = discountMenu;
     }
 
@@ -37,25 +37,15 @@ public enum DailyDiscountItem {
                 .orElse(null);
     }
 
-    /*
-    public static int getWeekendDiscount(DailyDiscountItem discountItem) {
-        return discountItem.weekendDiscount;
+    public int getWeekday(){
+        return weekday;
+    }
+    public int getWeekend() {
+        return weekend;
     }
 
-    public static int getSpecialDiscount(DailyDiscountItem discountItem) {
-        return discountItem.specialDiscount;
-    }
-
-     */
-    public int getWeekdayDiscount(){
-        return weekdayDiscount;
-    }
-    public int getWeekendDiscount() {
-        return weekendDiscount;
-    }
-
-    public int getSpecialDiscount() {
-        return specialDiscount;
+    public int getSpecial() {
+        return special;
     }
 
     public String getDiscountMenu() {
