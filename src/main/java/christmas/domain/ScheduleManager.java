@@ -6,7 +6,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class ScheduleManager {
-
     private static final int YEAR = 2023;
     private static final int MONTH = 12;
     private static final int D_DAY_DISCOUNT_MIN = 1;
@@ -19,8 +18,8 @@ public class ScheduleManager {
         this.visitDate = visitDate;
     }
 
-    public DailyDiscountItem getDayOfWeek(){
-        if(visitDate == 25){
+    public DailyDiscountItem getDayOfWeek() {
+        if (visitDate == 25) {
             return DailyDiscountItem.CHRISTMAS;
         }
 
@@ -29,22 +28,22 @@ public class ScheduleManager {
         return DailyDiscountItem.getDayOfWeek(dayOfWeek);
     }
 
-    public int calculateDDay(){
-        if(visitDate>=D_DAY_DISCOUNT_MIN && visitDate<=D_DAY_DISCOUNT_MAX){
+    public int calculateDDay() {
+        if (visitDate >= D_DAY_DISCOUNT_MIN && visitDate <= D_DAY_DISCOUNT_MAX) {
             return visitDate - D_DAY_DISCOUNT_MIN;
         }
         return D_DAY_DISCOUNT_ERROR_CONSTANT;
     }
 
-    public static boolean isWithinRangeDate(){
-        if(visitDate>=D_DAY_DISCOUNT_MIN && visitDate<=D_DAY_DISCOUNT_MAX){
+    public static boolean isWithinRangeDate() {
+        if (visitDate >= D_DAY_DISCOUNT_MIN && visitDate <= D_DAY_DISCOUNT_MAX) {
             return true;
         }
         return false;
     }
 
-
-    public int getVisitDate(){
+    public int getVisitDate() {
         return visitDate;
     }
+
 }

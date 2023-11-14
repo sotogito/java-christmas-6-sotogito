@@ -2,18 +2,17 @@ package christmas.domain;
 
 import java.time.DayOfWeek;
 import java.util.Arrays;
-import java.util.List;
 
 public enum DailyDiscountItem {
-    SUN(DayOfWeek.SUNDAY, 2023,0, 1000, "디저트"),
-    MON(DayOfWeek.MONDAY, 2023,0, 0, "디저트"),
-    TUES(DayOfWeek.TUESDAY, 2023,0, 0, "디저트"),
-    WED(DayOfWeek.WEDNESDAY, 2023,0, 0, "디저트"),
-    THURS(DayOfWeek.THURSDAY, 2023,0, 0, "디저트"),
-    FRI(DayOfWeek.FRIDAY, 0,2023, 0, "메인"),
-    SAT(DayOfWeek.SATURDAY, 0,2023, 0, "메인"),
-    CHRISTMAS(DayOfWeek.SATURDAY, 2023,0, 1000, "디저트"),
-    NOTHING(null, 0,0, 0, "null");
+    SUN(DayOfWeek.SUNDAY, 2023, 0, 1000, "디저트"),
+    MON(DayOfWeek.MONDAY, 2023, 0, 0, "디저트"),
+    TUES(DayOfWeek.TUESDAY, 2023, 0, 0, "디저트"),
+    WED(DayOfWeek.WEDNESDAY, 2023, 0, 0, "디저트"),
+    THURS(DayOfWeek.THURSDAY, 2023, 0, 0, "디저트"),
+    FRI(DayOfWeek.FRIDAY, 0, 2023, 0, "메인"),
+    SAT(DayOfWeek.SATURDAY, 0, 2023, 0, "메인"),
+    CHRISTMAS(DayOfWeek.SATURDAY, 2023, 0, 1000, "디저트"),
+    NOTHING(null, 0, 0, 0, "null");
 
     private final DayOfWeek dayOfWeek;
     private final int weekday;
@@ -24,7 +23,7 @@ public enum DailyDiscountItem {
     DailyDiscountItem(
             DayOfWeek dayOfWeek, int weekday, int weekend, int special, String discountMenu) {
         this.dayOfWeek = dayOfWeek;
-        this.weekday =weekday;
+        this.weekday = weekday;
         this.weekend = weekend;
         this.special = special;
         this.discountMenu = discountMenu;
@@ -37,9 +36,10 @@ public enum DailyDiscountItem {
                 .orElse(null);
     }
 
-    public int getWeekday(){
+    public int getWeekday() {
         return weekday;
     }
+
     public int getWeekend() {
         return weekend;
     }

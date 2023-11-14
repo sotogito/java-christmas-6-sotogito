@@ -27,114 +27,114 @@ public class OutputView {
     public static void printIntroPreviewToView(int visitDate) {
         String MSG = String.format(MESSAGE_INTRO_PREVIEW, visitDate);
         System.out.println(MSG);
-
     }
 
-    public static void printMenuList(Category categorys, List<MenuItem> menus) {
-        String category = "<" + categorys.getName() + ">";
-        String menuList = "";
+    public static void printMenuList(Category category, List<MenuItem> menus) {
+        String categoryHeader = "<" + category.getName() + ">";
+        StringBuilder menuListBuilder = new StringBuilder();
 
         for (int i = 0; i < menus.size(); i++) {
-            menuList += menus.get(i).getName();
-            menuList += "(" + String.format("%,d", menus.get(i).getPrice()) + ")";
-            menuList += isEndOfLine(i, menus.size());
+            menuListBuilder.append(menus.get(i).getName())
+                    .append("(")
+                    .append(String.format("%,d", menus.get(i).getPrice()))
+                    .append(")")
+                    .append(isEndOfLine(i, menus.size()));
         }
-        System.out.println(category);
-        System.out.println(menuList);
+        System.out.println(categoryHeader);
+        System.out.println(menuListBuilder);
     }
 
-    public static void printNotice(){
+    public static void printNotice() {
         System.out.print("<이벤트 주의 사항>\n");
-        System.out.print("-"+NOTICE_MIN_ORDER_AMOUNT);
-        System.out.print("-"+NOTICE_CANT_ONLY_BEVERAGE);
-        System.out.println("-"+NOTICE_MAX_ORDER_QUANTITY);
-
-    }
-
-    private static String isEndOfLine(int i, int size) {
-        String add = "";
-        if (i < size - 1) {
-            add += ", ";
-        }
-        if (i == size - 1) {
-            add += "\n";
-        }
-        return add;
+        System.out.print("-" + NOTICE_MIN_ORDER_AMOUNT);
+        System.out.print("-" + NOTICE_CANT_ONLY_BEVERAGE);
+        System.out.println("-" + NOTICE_MAX_ORDER_QUANTITY);
     }
 
     public static void printOrderMenu(Map<String, Integer> orderMenuAndQuantity) {
         System.out.println("<주문 메뉴>");
         for (Map.Entry<String, Integer> entry : orderMenuAndQuantity.entrySet()) {
             String MSG = String.format(MESSAGE_ORDER_MENU_LIST, entry.getKey(), entry.getValue());
-            System.out.print(MSG);
 
+            System.out.print(MSG);
         }
     }
 
-    public static void printAmountBeforeDiscount(int amount){
+    public static void printAmountBeforeDiscount(int amount) {
         System.out.println("\n<할인 전 총주문 금액>");
         String amountFormatted = String.format("%,d", amount);
-        String MSG = String.format(MESSAGE_PRICE,amountFormatted);
+        String MSG = String.format(MESSAGE_PRICE, amountFormatted);
+
         System.out.println(MSG);
     }
 
-    public static void printComplimentaryMenu(Map<String, Integer> complimentaryMenu){
+    public static void printComplimentaryMenu(Map<String, Integer> complimentaryMenu) {
         System.out.println("<증정 메뉴>");
-        for(Map.Entry<String,Integer> entry : complimentaryMenu.entrySet()){
+        for (Map.Entry<String, Integer> entry : complimentaryMenu.entrySet()) {
             String MSG = String.format(MESSAGE_ORDER_MENU_LIST, entry.getKey(), entry.getValue());
-            isPrintNothingOrMsg(entry.getValue(),MSG);
+            isPrintNothingOrMsg(entry.getValue(), MSG);
         }
     }
-    public static void printDiscountDetails(Map<DiscountType,Integer> details,boolean nothing){
+
+    public static void printDiscountDetails(Map<DiscountType, Integer> details, boolean nothing) {
         System.out.println("\n<혜택 내역>");
-        if(nothing){
+        if (nothing) {
             System.out.print(MESSAGE_NOTHING);
         }
-        if(!nothing){
+        if (!nothing) {
             hasDiscountDetails(details);
         }
     }
-    private static void hasDiscountDetails(Map<DiscountType,Integer> details){
-        for(Map.Entry<DiscountType,Integer> entry : details.entrySet()){
+
+    private static void hasDiscountDetails(Map<DiscountType, Integer> details) {
+        for (Map.Entry<DiscountType, Integer> entry : details.entrySet()) {
             if (entry.getValue() > 0) { //0원인건 출력하지 않음
                 String amountFormatted = String.format("%,d", entry.getValue());
                 String MSG = entry.getKey().getDescription() + ": ";
                 MSG += String.format(MESSAGE_DISCOUNT_PRICE, amountFormatted);
+
                 System.out.print(MSG);
             }
         }
     }
 
-    public static void printTotalDiscountAmount(int totalDiscountAmount){
+    public static void printTotalDiscountAmount(int totalDiscountAmount) {
         System.out.println("\n<총혜택 금액>");
-
-        String MSG = "";
         String amountFormatted = String.format("%,d", totalDiscountAmount);
-        if(totalDiscountAmount<=0){
+        String MSG = "";
+
+        if (totalDiscountAmount == 0) {
             MSG = String.format(MESSAGE_PRICE, amountFormatted);
-        }else if(totalDiscountAmount>0){
+        } else if (totalDiscountAmount > 0) {
             MSG = String.format(MESSAGE_DISCOUNT_PRICE, amountFormatted);
         }
         System.out.print(MSG);
     }
-    public static void printDiscountedAmount(int discountedAmount){
-        System.out.println("\n<할인 후 예상 결제 금액>");
 
+    public static void printDiscountedAmount(int discountedAmount) {
+        System.out.println("\n<할인 후 예상 결제 금액>");
         String amountFormatted = String.format("%,d", discountedAmount);
         String MSG = String.format(MESSAGE_PRICE, amountFormatted);
+
         System.out.print(MSG);
-
     }
-    public static void printEventBadge(String badge){
-        System.out.println("\n<12월 이벤트 배지>");
 
+    public static void printEventBadge(String badge) {
+        System.out.println("\n<12월 이벤트 배지>");
         System.out.print(badge);
     }
 
-    private static void isPrintNothingOrMsg(int quantity, String msg){
-        if(quantity<=NON_QUANTITY){
+    private static String isEndOfLine(int i, int size) {
+        if (i < size - 1) {
+            return ", ";
+        }
+        return "\n";
+    }
+
+    private static void isPrintNothingOrMsg(int quantity, String msg) {
+        if (quantity == NON_QUANTITY) {
             System.out.print(MESSAGE_NOTHING);
-        }else if(quantity>NON_QUANTITY){
+        } else if (quantity > NON_QUANTITY) {
             System.out.print(msg);
         }
     }

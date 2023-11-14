@@ -9,12 +9,10 @@ import java.util.Map;
 
 public class Menu {
     private static Map<Category, List<MenuItem>> menu = new EnumMap<>(Category.class);
-
     private static List<MenuItem> APPETIZER = new ArrayList<>();
     private static List<MenuItem> MAIN_COURSE = new ArrayList<>();
     private static List<MenuItem> DESSERT = new ArrayList<>();
     private static List<MenuItem> BEVERAGE = new ArrayList<>();
-
 
     static {
         initMenuItem();
@@ -22,7 +20,6 @@ public class Menu {
         menu.put(Category.MAIN_COURSE, MAIN_COURSE);
         menu.put(Category.DESSERT, DESSERT);
         menu.put(Category.BEVERAGE, BEVERAGE);
-
     }
 
     private static void initMenuItem() {
@@ -40,7 +37,6 @@ public class Menu {
         BEVERAGE.add(new MenuItem("샴페인", 25000));
     }
 
-
     public static MenuItem findMenuItem(String orderMenuName) {
         return menu.values().stream()
                 .flatMap(List::stream)
@@ -57,7 +53,6 @@ public class Menu {
                 .orElse(null);
     }
 
-
     public static Map<Category, List<MenuItem>> getMenu() {
         Map<Category, List<MenuItem>> immutableMenu = new EnumMap<>(Category.class);
         for (Map.Entry<Category, List<MenuItem>> entry : menu.entrySet()) {
@@ -66,15 +61,13 @@ public class Menu {
         return immutableMenu;
     }
 
-    public static int findOrderMenuAndReturnPrice(String orderMenuName){
+    public static int findOrderMenuAndReturnPrice(String orderMenuName) {
         return menu.values().stream()
                 .flatMap(List::stream)
                 .filter(item -> item.getName().equals(orderMenuName))
-                .mapToInt(MenuItem::getPrice) // Item 객체에서 가격을 얻습니다.
+                .mapToInt(MenuItem::getPrice)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(InputView.ERROR_ORDER_MENU+"whswo"));
-
+                .orElseThrow(() -> new IllegalArgumentException(InputView.ERROR_ORDER_MENU + "whswo"));
     }
-
 
 }

@@ -16,4 +16,5 @@ public enum DiscountType {
     public String getDescription() {
         return description;
     }
+
 }

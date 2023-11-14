@@ -8,15 +8,15 @@ public class MoneyManager {
         this.totalOrderAmount = totalOrderAmount;
     }
 
-    public int getTotalOrderAmount(){
+    public int getTotalOrderAmount() {
         return totalOrderAmount;
     }
 
-    public static boolean isWithinRangeAmount(){
-        return totalOrderAmount>=MIN_AMOUNT;
+    public static boolean isWithinRangeAmount() {
+        return totalOrderAmount >= MIN_AMOUNT;
     }
 
-    public int getDiscountedAmount(int discount){
+    public int getDiscountedAmount(int discount) {
         return totalOrderAmount - discount;
     }
 

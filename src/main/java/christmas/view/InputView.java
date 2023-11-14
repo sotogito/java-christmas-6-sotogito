@@ -1,7 +1,6 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.util.Validator.VisitDateValidator;
 
 import java.util.*;
 
@@ -13,7 +12,6 @@ public class InputView {
     private static final String ERROR_VISIT_DATE = "유효하지 않은 날짜입니다. 다시 입력해 주세요.\n";
     public static final String ERROR_ORDER_MENU = "유효하지 않은 주문입니다. 다시 입력해 주세요.\n";
 
-
     public int getVisitData() {
         System.out.print(MESSAGE_INPUT_VISIT_DATE);
         try {
@@ -23,6 +21,7 @@ public class InputView {
         }
     }
 
+    //region getOrderMenu
     public Map<String, Integer> getOrderMenu() {
         System.out.print(MESSAGE_INPUT_ORDER_MENU);
         String input = Console.readLine();
@@ -58,9 +57,10 @@ public class InputView {
         }
         return new AbstractMap.SimpleEntry<>(menu, quantity);
     }
-
+    //endregion
 
     public static void introEventPlaner() {
         System.out.print(MESSAGE_INTRO_EVENT_PLANNER);
     }
+
 }

@@ -6,7 +6,6 @@ public enum Category {
     DESSERT("디저트"),
     BEVERAGE("음료");
 
-
     private String name;
 
     Category(String name) {
@@ -16,4 +15,5 @@ public enum Category {
     public String getName() {
         return name;
     }
+
 }

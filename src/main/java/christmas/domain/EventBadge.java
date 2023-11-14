@@ -20,27 +20,22 @@ public enum EventBadge {
 
     public static String findBadgeForAmount(int totalDiscountAmount) {
         boolean isWithinRangeAmount = MoneyManager.isWithinRangeAmount();
-        String badgeType = NOTHING.badgeType;
 
         if (!isWithinRangeAmount) {
-            badgeType = NOTHING.badgeType;
-        } else if (isWithinRangeAmount) {
-            badgeType = getBadge(totalDiscountAmount).badgeType;
+            return NOTHING.badgeType;
         }
-        return badgeType;
+        return getBadge(totalDiscountAmount).badgeType;
     }
 
     private static EventBadge getBadge(int totalDiscountAmount) {
-        EventBadge eventBadge = NOTHING;
         if (totalDiscountAmount >= SANTA.getMinimumAmount()) {
-            eventBadge = SANTA;
+            return SANTA;
         } else if (totalDiscountAmount >= TREE.getMinimumAmount()) {
-            eventBadge = TREE;
+            return TREE;
         } else if (totalDiscountAmount >= STAR.getMinimumAmount()) {
-            eventBadge = STAR;
-        } else if (totalDiscountAmount < NOTHING.getMinimumAmount()) {
-            eventBadge = NOTHING;
+            return STAR;
         }
-        return eventBadge;
+        return NOTHING;
     }
+
 }

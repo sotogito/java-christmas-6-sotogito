@@ -1,42 +1,39 @@
 package christmas.domain;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class ComplimentaryItem {
     private static final int CAN_COMPLIMENTARY_MIN = 120000;
     private static final int COMPLIMENTARY_QUANTITY = 1;
     private static final int NOTHING = 0;
-    private static MenuItem complimentaryItem;
+    private static final MenuItem complimentaryItem;
     private static boolean isReceive;
 
     static {
-        MenuItem menuItem = Menu.findMenuItem("샴페인");
-        complimentaryItem = menuItem;
+        complimentaryItem= Menu.findMenuItem("샴페인");
     }
 
     public static Map<String, Integer> getComplimentaryItem(int amount) {
         Map<String, Integer> itemNameAndQuantity = new LinkedHashMap<>();
 
-        if (amount >= CAN_COMPLIMENTARY_MIN) {
-            itemNameAndQuantity.put(complimentaryItem.getName(), COMPLIMENTARY_QUANTITY);
-            isReceive = true;
-        } else if((amount < CAN_COMPLIMENTARY_MIN)) {
+        if(amount < CAN_COMPLIMENTARY_MIN){
             itemNameAndQuantity.put(complimentaryItem.getName(), NOTHING);
             isReceive = false;
+            return itemNameAndQuantity;
         }
+        itemNameAndQuantity.put(complimentaryItem.getName(), COMPLIMENTARY_QUANTITY);
+        isReceive = true;
         return itemNameAndQuantity;
     }
 
-
-    public static int getAmount(){
-        int amount = NOTHING;
+    public static int getAmount() {
         String item = complimentaryItem.getName();
-        if(isReceive){
-            amount = Menu.findOrderMenuAndReturnPrice(item);
-        }else if(!isReceive){
-            amount = NOTHING;
+
+        if(!isReceive){
+            return NOTHING;
         }
-        return amount;
+        return Menu.findOrderMenuAndReturnPrice(item);
     }
 
 }
