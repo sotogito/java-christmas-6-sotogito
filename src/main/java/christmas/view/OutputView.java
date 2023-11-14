@@ -10,9 +10,7 @@ import java.util.Map;
 public class OutputView {
 
     private static final String MESSAGE_INTRO_PREVIEW = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n";
-    private static final String NOTICE_INTRO_PREVIEW = "총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.\n";
-    private static final String NOTICE_INTR_PREVIEW = "음료만 주문 시, 주문할 수 없습니다.\n";
-    private static final String MESSAGE_D_DAY_DISCOUNT = "크리스마스 디데이 할인: -%s\n";
+    private static final String NOTICE_MIN_DISCOUNT_AMOUNT = "총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.\n";
     private static final String MESSAGE_ORDER_MENU_LIST = "%s %d개\n";
     private static final String MESSAGE_PRICE = "%s원\n";
     private static final String MESSAGE_DISCOUNT_PRICE = "-%s원\n";
@@ -122,13 +120,9 @@ public class OutputView {
         System.out.print(badge);
     }
 
-
-
-
-
-
-
-
+    public static void printNoticeMinDiscountAmount(){
+        System.out.print(NOTICE_MIN_DISCOUNT_AMOUNT);
+    }
 
 
     private static void isPrintNothingOrMsg(int quantity, String msg){
@@ -138,4 +132,5 @@ public class OutputView {
             System.out.print(msg);
         }
     }
+
 }

@@ -1,7 +1,6 @@
 package christmas.controller;
 
 import christmas.domain.*;
-import christmas.util.Validator.VisitDateValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -14,51 +13,17 @@ public class ChristmasPromotion {
     public void startPlaning(){
         ScheduleManager scheduleManager = getVisitDate();
         sendMenuList();
-        OrderManager orderManager = getOrderMenu(); //여기문제
+        OrderManager orderManager = getOrderMenu();
         MoneyManager moneyManager = getAmountBeforeDiscount(orderManager);
         EventPlanner eventPlanner = runEventPlanner(scheduleManager,orderManager);
-
-        /*
-        int date = scheduleManager.calculateDDay();
-        System.out.println(eventPlanner.getDDayDiscount(date)+"디데이할인");
-        System.out.println(eventPlanner.getWeekdayDiscount()+"평일할인");
-        System.out.println(eventPlanner.getWeekendDiscount()+"주말할인");
-        System.out.println(eventPlanner.getSpecialDiscount()+"스페셩할인");
-        //EnumMap으로 넣어서 출력
-        eventPlanner.getComplimentaryMenu(moneyManager.getTotalOrderAmount());
-        System.out.println(eventPlanner.getAmountToDiscount());
-        System.out.println(eventPlanner.getTotalDiscountAmount());
-        */
-
-
-
-        System.out.println("-------------------");
 
         sendIntroPreview(scheduleManager);
         sendOrderList(orderManager);
         sendAmountBeforeDiscount(moneyManager);
         sendComplimentaryMenu(moneyManager,eventPlanner);
         sendDiscountDetails(eventPlanner,scheduleManager);
-
         sendAmount(moneyManager,eventPlanner);
         sendEventBadge(eventPlanner);
-
-        //총혜택
-        //할인 후 예산 결제 금액
-        //12원 이벤트 배지
-
-
-
-
-        /*
-        Map<Category, Integer> immutableMenu = orderManager.getOrderCategoryAndQuantity();
-        for (Map.Entry<Category,Integer> entry : orderManager.getOrderCategoryAndQuantity().entrySet()) {
-            System.out.println(entry.getKey()+"카테고리 출력"+entry.getValue());
-        }
-
-         */
-
-
     }
 
 
@@ -89,9 +54,6 @@ public class ChristmasPromotion {
         return new EventPlanner(dayOfWeek,orderCategory);
 
     }
-
-
-
 
 
     private void sendIntroPreview(ScheduleManager scheduleManager){
