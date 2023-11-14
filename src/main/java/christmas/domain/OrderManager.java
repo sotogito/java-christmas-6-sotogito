@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.util.Validator.MoneyValidator;
 import christmas.util.Validator.OrderMenuValidator;
 
 import java.util.*;

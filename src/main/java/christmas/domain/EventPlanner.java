@@ -29,13 +29,17 @@ public class EventPlanner {
 
     }
     public int getDDayDiscount(int date){
+        int discountAmount = D_DAY_DISCOUNT_BASIC_AMOUNT;
+        D_DAY_DISCOUNT_ERROR_CONSTANT=1;
         if(!ScheduleManager.isWithinRangeDate()){
             D_DAY_DISCOUNT_ERROR_CONSTANT = 0;
             return D_DAY_DISCOUNT_ERROR_CONSTANT;
+        }else if(ScheduleManager.isWithinRangeDate()){
+            discountAmount += date*D_DAY_DISCOUNT_ADD_AMOUNT;
+            amountToDiscount+=discountAmount*D_DAY_DISCOUNT_ERROR_CONSTANT;
         }
-        int discountAmount = D_DAY_DISCOUNT_BASIC_AMOUNT;
-        discountAmount += date*D_DAY_DISCOUNT_ADD_AMOUNT;
-        amountToDiscount+=discountAmount*D_DAY_DISCOUNT_ERROR_CONSTANT;
+        //System.out.println(D_DAY_DISCOUNT_ERROR_CONSTANT);
+        //System.out.println(discountAmount*D_DAY_DISCOUNT_ERROR_CONSTANT+"wefwefwfe");
         return discountAmount*D_DAY_DISCOUNT_ERROR_CONSTANT;
     }
 

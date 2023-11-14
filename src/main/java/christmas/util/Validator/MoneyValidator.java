@@ -9,7 +9,7 @@ public class MoneyValidator {
         if (amount < MIN_AMOUNT) {
             String minAmountFormatted = String.format("%,d", MIN_AMOUNT);
             String MSG = String.format(NOTICE_MIN_RANGE, minAmountFormatted);
-            System.out.print(NOTICE_MIN_RANGE);
+            System.out.print(MSG);
         }
     }
 

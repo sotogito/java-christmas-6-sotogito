@@ -13,7 +13,7 @@ public class MoneyManager {
     }
 
     public static boolean isWithinRangeAmount(){
-        return totalOrderAmount>=10000;
+        return totalOrderAmount>=MIN_AMOUNT;
     }
 
     public int getTotalAmountAfterDiscount(int discount){
