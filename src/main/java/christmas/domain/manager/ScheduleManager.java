@@ -14,9 +14,9 @@ public class ScheduleManager {
     private static final int D_DAY_DISCOUNT_ERROR_CONSTANT = 0;
     private static int visitDate;
 
-    public ScheduleManager(int visitDate) {
-        VisitDateValidator.visitDateValidator(visitDate);
-        this.visitDate = visitDate;
+    public ScheduleManager(int date) {
+        VisitDateValidator.visitDateValidator(date);
+        visitDate = date;
     }
 
     public DailyDiscountItem getDayOfWeek() {
@@ -37,10 +37,7 @@ public class ScheduleManager {
     }
 
     public static boolean isWithinRangeDate() {
-        if (visitDate >= D_DAY_DISCOUNT_MIN && visitDate <= D_DAY_DISCOUNT_MAX) {
-            return true;
-        }
-        return false;
+        return visitDate >= D_DAY_DISCOUNT_MIN && visitDate <= D_DAY_DISCOUNT_MAX;
     }
 
     public int getVisitDate() {

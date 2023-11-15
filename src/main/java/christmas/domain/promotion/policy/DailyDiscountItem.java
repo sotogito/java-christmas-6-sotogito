@@ -11,7 +11,7 @@ public enum DailyDiscountItem {
     THURS(DayOfWeek.THURSDAY, 2023, 0, 0, "디저트"),
     FRI(DayOfWeek.FRIDAY, 0, 2023, 0, "메인"),
     SAT(DayOfWeek.SATURDAY, 0, 2023, 0, "메인"),
-    CHRISTMAS(DayOfWeek.SATURDAY, 2023, 0, 1000, "디저트"),
+    CHRISTMAS(DayOfWeek.MONDAY, 2023, 0, 1000, "디저트"),
     NOTHING(null, 0, 0, 0, "null");
 
     private final DayOfWeek dayOfWeek;

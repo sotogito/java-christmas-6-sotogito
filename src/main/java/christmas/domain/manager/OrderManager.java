@@ -19,6 +19,7 @@ public class OrderManager {
             String menu = entry.getKey();
             int quantity = entry.getValue();
             MenuItem menuItem = Menu.findMenuItem(menu);
+
             totalOrderAmount += Menu.findOrderMenuAndReturnPrice(menu) * quantity;
             orderCategory.merge(Menu.findCategory(menuItem), quantity, Integer::sum);
         }
