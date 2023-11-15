@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OrderManager {
-    private Map<String, Integer> orderMenu;
-    private Map<Category, Integer> orderCategory = new HashMap<>();
+    private final Map<String, Integer> orderMenu;
+    private final Map<Category, Integer> orderCategory = new HashMap<>();
     private int totalOrderAmount = 0;
 
     public OrderManager(Map<String, Integer> orderMenus) {

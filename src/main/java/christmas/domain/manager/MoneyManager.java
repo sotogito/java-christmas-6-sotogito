@@ -4,8 +4,8 @@ public class MoneyManager {
     private static final int MIN_AMOUNT = 10000;
     private static int totalOrderAmount = 0;
 
-    public MoneyManager(int totalOrderAmount) {
-        this.totalOrderAmount = totalOrderAmount;
+    public MoneyManager(int Amount) {
+        totalOrderAmount = Amount;
     }
 
     public int getTotalOrderAmount() {
@@ -19,6 +19,5 @@ public class MoneyManager {
     public int getDiscountedAmount(int discount) {
         return totalOrderAmount - discount;
     }
-
 
 }
