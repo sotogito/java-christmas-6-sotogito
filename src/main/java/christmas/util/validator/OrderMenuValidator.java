@@ -11,10 +11,12 @@ public class OrderMenuValidator {
     private static final String ERROR_ORDER_MENU = "메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.\n";
     private static final String NOTICE_ONLY_BEVERAGE = "음료만 주문 시, 주문할 수 없습니다.\n";
 
-    public static void orderMenuValidator(int quantity, Map<Category, Integer> orderCategory) {
-        if (!isWithinRangeNum(quantity)) {
+    public static void orderMenuValidator(Map<Category, Integer> orderCategory) {
+        int total = orderCategory.values().stream().mapToInt(Integer::intValue).sum();
+
+        if (!isWithinRangeNum(total)) {
             throw new IllegalArgumentException(ERROR_ORDER_MENU);
-        } else if (isOverMinQuantity(quantity)) {
+        } else if (isOverMinQuantity(total)) {
             throw new IllegalArgumentException(InputView.ERROR_ORDER_MENU);
         } else if (isOnlyBeverage(orderCategory)) {
             throw new IllegalArgumentException(NOTICE_ONLY_BEVERAGE);

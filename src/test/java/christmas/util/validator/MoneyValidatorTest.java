@@ -18,7 +18,7 @@ class MoneyValidatorTest {
     final PrintStream standardOut = System.out;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 
@@ -34,10 +34,10 @@ class MoneyValidatorTest {
         int sample = 1000;
 
         String minAmountFormatted = String.format("%,d", minAmount);
-        String expect = String.format("총주문 금액 %s원 이상부터 이벤트가 적용됩니다.\n",minAmountFormatted);
+        String expect = String.format("총주문 금액 %s원 이상부터 이벤트가 적용됩니다.\n", minAmountFormatted);
         MoneyValidator.isWithinRangeAmount(sample);
 
-        assertEquals(expect,outputStreamCaptor.toString());
+        assertEquals(expect, outputStreamCaptor.toString());
     }
 
     @Test
