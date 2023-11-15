@@ -1,6 +1,7 @@
 package christmas.controller;
 
-import christmas.domain.*;
+//import christmas.domain.*;
+import christmas.domain.EventPlanner;
 import christmas.domain.manager.MoneyManager;
 import christmas.domain.manager.OrderManager;
 import christmas.domain.manager.ScheduleManager;
