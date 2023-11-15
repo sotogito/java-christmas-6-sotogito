@@ -12,16 +12,15 @@ public class OrderMenuValidator {
     private static final String NOTICE_ONLY_BEVERAGE = "음료만 주문 시, 주문할 수 없습니다.\n";
 
     public static void orderMenuValidator(Map<Category, Integer> orderCategory) {
-        int total = orderCategory.values().stream().mapToInt(Integer::intValue).sum();
+        int quantity = orderCategory.values().stream().mapToInt(Integer::intValue).sum();
 
-        if (!isWithinRangeNum(total)) {
+        if (!isWithinRangeNum(quantity)) {
             throw new IllegalArgumentException(ERROR_ORDER_MENU);
-        } else if (isOverMinQuantity(total)) {
+        } else if (isOverMinQuantity(quantity)) {
             throw new IllegalArgumentException(InputView.ERROR_ORDER_MENU);
         } else if (isOnlyBeverage(orderCategory)) {
             throw new IllegalArgumentException(NOTICE_ONLY_BEVERAGE);
         }
-
     }
 
     private static boolean isWithinRangeNum(int quantity) {
