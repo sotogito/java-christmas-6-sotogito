@@ -11,7 +11,7 @@ class DailyDiscountItemTest {
 
     @Test
     @DisplayName("요일 받고 해당 Enum 반환")
-    void getDayOfWeek(){
+    void getDayOfWeek() {
         DayOfWeek dayOfWeek = DayOfWeek.SATURDAY;
 
         DailyDiscountItem expect = DailyDiscountItem.SAT;

@@ -12,9 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class EventPlannerTest {
 
@@ -23,7 +21,7 @@ class EventPlannerTest {
     EventPlanner eventPlanner;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         int orderAmount = 90000;
         moneyManager = new MoneyManager(orderAmount);
         ComplimentaryItem.getComplimentaryItem(orderAmount);
@@ -33,12 +31,12 @@ class EventPlannerTest {
 
         DailyDiscountItem dayOfWeek = DailyDiscountItem.CHRISTMAS;
         Map<Category, Integer> orderCategory = new EnumMap<Category, Integer>(Category.class);
-        orderCategory.put(Category.DESSERT,2); //초코케이크
-        orderCategory.put(Category.BEVERAGE,1); //레드와
+        orderCategory.put(Category.DESSERT, 2); //초코케이크
+        orderCategory.put(Category.BEVERAGE, 1); //레드와인
+        eventPlanner = new EventPlanner(dayOfWeek, orderCategory);
+    }
 
-        eventPlanner = new EventPlanner(dayOfWeek,orderCategory);
-
-        /*
+    /*
         크리스마스에 적용되는 예상 할인
         1. 크리스마스 디데이 할인 : -3,400원
         2. 평일 할인 : -4,046원
@@ -46,49 +44,48 @@ class EventPlannerTest {
 
         총 혜택 금액 : 8,446원
          */
-    }
 
     @Test
     @DisplayName("크리스마스 디데이 할인")
-    void getDDayDiscount(){
+    void getDDayDiscount() {
         int date = scheduleManager.calculateDDay(); //24
 
         int expect = 3400;
         int result = eventPlanner.getDDayDiscount(date);
 
-        assertEquals(expect,result);
+        assertEquals(expect, result);
     }
 
     @Test
     @DisplayName("평일 할인")
-    void getWeekdayDiscount(){
+    void getWeekdayDiscount() {
         int expect = 4046;
         int result = eventPlanner.getWeekdayDiscount();
 
-        assertEquals(expect,result);
+        assertEquals(expect, result);
     }
 
     @Test
     @DisplayName("주말 할인")
-    void getWeekendDiscount(){
+    void getWeekendDiscount() {
         int expect = 0;
         int result = eventPlanner.getWeekendDiscount();
 
-        assertEquals(expect,result);
+        assertEquals(expect, result);
     }
 
     @Test
     @DisplayName("특별 할인")
-    void getSpecialDiscount(){
+    void getSpecialDiscount() {
         int expect = 1000;
         int result = eventPlanner.getSpecialDiscount();
 
-        assertEquals(expect,result);
+        assertEquals(expect, result);
     }
 
     @Test
     @DisplayName("총 혜택 금액 +샴페인 금액")
-    void getTotalDiscountAmount(){
+    void getTotalDiscountAmount() {
         getDDayDiscount();
         getWeekdayDiscount();
         getWeekendDiscount();
@@ -97,12 +94,12 @@ class EventPlannerTest {
         int expect = 8446;
         int result = eventPlanner.getTotalDiscountAmount();
 
-        assertEquals(expect,result);
+        assertEquals(expect, result);
     }
 
     @Test
     @DisplayName("총 혜택 금액 +샴페인 금액")
-    void getAmountToDiscount(){
+    void getAmountToDiscount() {
         getDDayDiscount();
         getWeekdayDiscount();
         getWeekendDiscount();
@@ -111,7 +108,7 @@ class EventPlannerTest {
         int expect = 8446;
         int result = eventPlanner.getAmountToDiscount();
 
-        assertEquals(expect,result);
+        assertEquals(expect, result);
     }
 
 }

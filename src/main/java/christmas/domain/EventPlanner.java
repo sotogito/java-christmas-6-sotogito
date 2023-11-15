@@ -12,7 +12,7 @@ public class EventPlanner {
     private static final int D_DAY_DISCOUNT_BASIC_AMOUNT = 1000;
     private static final int D_DAY_DISCOUNT_ADD_AMOUNT = 100;
     private static int D_DAY_DISCOUNT_ERROR_CONSTANT;
-    private Map<Category, Integer> orderCategory;
+    private final Map<Category, Integer> orderCategory;
     DailyDiscountItem discountData;
     private int amountToDiscount; //샴페인 금액 포함 안됨
 

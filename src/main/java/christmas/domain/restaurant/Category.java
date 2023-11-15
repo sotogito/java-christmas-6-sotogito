@@ -6,7 +6,7 @@ public enum Category {
     DESSERT("디저트"),
     BEVERAGE("음료");
 
-    private String name;
+    private final String name;
 
     Category(String name) {
         this.name = name;

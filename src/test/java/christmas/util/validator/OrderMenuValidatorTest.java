@@ -15,9 +15,9 @@ class OrderMenuValidatorTest {
     @Test
     @DisplayName("정상입력시 예외 처리 없음")
     void orderMenuValidator() {
-        Map<Category,Integer> orderCategory = new HashMap<>();
-        orderCategory.put(Category.APPETIZER,7);
-        orderCategory.put(Category.MAIN_COURSE,8);
+        Map<Category, Integer> orderCategory = new HashMap<>();
+        orderCategory.put(Category.APPETIZER, 7);
+        orderCategory.put(Category.MAIN_COURSE, 8);
         //총합 : 15개
 
         assertDoesNotThrow(() -> OrderMenuValidator.orderMenuValidator(orderCategory));
@@ -26,9 +26,9 @@ class OrderMenuValidatorTest {
     @Test
     @DisplayName("메뉴 20개 이상일시 예외 처리")
     void isWithinRangeNum() {
-        Map<Category,Integer> orderCategory = new HashMap<>();
-        orderCategory.put(Category.APPETIZER,13);
-        orderCategory.put(Category.MAIN_COURSE,8);
+        Map<Category, Integer> orderCategory = new HashMap<>();
+        orderCategory.put(Category.APPETIZER, 13);
+        orderCategory.put(Category.MAIN_COURSE, 8);
         //총합 : 21개
 
         assertThatThrownBy(() -> OrderMenuValidator.orderMenuValidator(orderCategory))
@@ -39,8 +39,8 @@ class OrderMenuValidatorTest {
     @Test
     @DisplayName("메뉴 1개 이하실시 예외 처리")
     void isOverMinQuantity() {
-        Map<Category,Integer> orderCategory = new HashMap<>();
-        orderCategory.put(Category.APPETIZER,0);
+        Map<Category, Integer> orderCategory = new HashMap<>();
+        orderCategory.put(Category.APPETIZER, 0);
         //총합 : 0개
 
         assertThatThrownBy(() -> OrderMenuValidator.orderMenuValidator(orderCategory))
@@ -49,11 +49,10 @@ class OrderMenuValidatorTest {
     }
 
     @Test
-    @DisplayName("음료민 시킬시 예외 처리")
+    @DisplayName("음료만 시킬시 예외 처리")
     void isOnlyBeverage() {
-        Map<Category,Integer> orderCategory = new HashMap<>();
-        orderCategory.put(Category.BEVERAGE,5);
-        //총합 : 0개
+        Map<Category, Integer> orderCategory = new HashMap<>();
+        orderCategory.put(Category.BEVERAGE, 5);
 
         assertThatThrownBy(() -> OrderMenuValidator.orderMenuValidator(orderCategory))
                 .isInstanceOf(IllegalArgumentException.class)

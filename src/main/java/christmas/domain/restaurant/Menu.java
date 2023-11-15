@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Menu {
-    private static Map<Category, List<MenuItem>> menu = new EnumMap<>(Category.class);
-    private static List<MenuItem> APPETIZER = new ArrayList<>();
-    private static List<MenuItem> MAIN_COURSE = new ArrayList<>();
-    private static List<MenuItem> DESSERT = new ArrayList<>();
-    private static List<MenuItem> BEVERAGE = new ArrayList<>();
+    private static final Map<Category, List<MenuItem>> menu = new EnumMap<>(Category.class);
+    private static final List<MenuItem> APPETIZER = new ArrayList<>();
+    private static final List<MenuItem> MAIN_COURSE = new ArrayList<>();
+    private static final List<MenuItem> DESSERT = new ArrayList<>();
+    private static final List<MenuItem> BEVERAGE = new ArrayList<>();
 
     static {
         initMenuItem();
