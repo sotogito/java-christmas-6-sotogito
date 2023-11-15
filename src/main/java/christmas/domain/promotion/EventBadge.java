@@ -6,7 +6,7 @@ public enum EventBadge {
     STAR("별", 5000),
     TREE("트리", 10000),
     SANTA("산타", 20000),
-    NOTHING("없음", 5000);
+    NOTHING("없음", 0);
 
     private final String badgeType;
     private final int minimumAmount;
@@ -16,7 +16,7 @@ public enum EventBadge {
         this.minimumAmount = minimumAmount;
     }
 
-    public int getMinimumAmount() {
+    private int getMinimumAmount() {
         return minimumAmount;
     }
 
