@@ -10,4 +10,5 @@ public class SpecialCalculator implements DiscountCalculator {
     public int calculate(int constant){
         return DISCOUNT_AMOUNT*constant;
     }
+
 }
