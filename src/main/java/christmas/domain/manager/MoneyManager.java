@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.manager;
 
 public class MoneyManager {
     private int orderAmount;

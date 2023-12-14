@@ -1,5 +1,7 @@
-package christmas.domain;
+package christmas.domain.manager;
 
+import christmas.domain.Menu;
+import christmas.domain.MenuItem;
 import christmas.enums.Category;
 
 import java.util.HashMap;
