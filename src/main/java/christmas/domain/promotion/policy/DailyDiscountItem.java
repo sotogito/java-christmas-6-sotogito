@@ -19,7 +19,7 @@ public enum DailyDiscountItem {
     private final boolean weekend;
     private final boolean special;
 
-    private DailyDiscountItem(DayOfWeek dayOfWeek, boolean weekday, boolean weekend, boolean special) {
+    DailyDiscountItem(DayOfWeek dayOfWeek, boolean weekday, boolean weekend, boolean special) {
         this.dayOfWeek = dayOfWeek;
         this.weekday = weekday;
         this.weekend = weekend;
@@ -33,7 +33,7 @@ public enum DailyDiscountItem {
                 .orElse(null);
     }
 
-    public boolean getWeekday(){
+    public boolean getWeekday() {
         return weekday;
     }
 

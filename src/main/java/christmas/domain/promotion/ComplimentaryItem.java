@@ -21,7 +21,7 @@ public enum ComplimentaryItem {
         return item;
     }
 
-    public int getPrice(){
+    public int getPrice() {
         return min_amount;
     }
 

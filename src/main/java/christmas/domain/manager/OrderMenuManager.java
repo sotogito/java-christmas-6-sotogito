@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class OrderMenuManager {
-    private final Map<MenuItem,Integer> orderMenu = new LinkedHashMap<>();
+    private final Map<MenuItem, Integer> orderMenu = new LinkedHashMap<>();
 
     public OrderMenuManager(Map<String, Integer> orderMenus) {
         updateOrderMenu(orderMenus);
@@ -17,8 +17,7 @@ public class OrderMenuManager {
         //총 주문이 10000이 넘는지
     }
 
-
-    public int getOrderTotalAmount(){
+    public int getOrderTotalAmount() {
         int totalAmount = 0;
         for (Map.Entry<MenuItem, Integer> entry : orderMenu.entrySet()) {
             totalAmount += Menu.findMenuPrice(entry.getKey()) * entry.getValue();
@@ -26,21 +25,21 @@ public class OrderMenuManager {
         return totalAmount;
     }
 
-    public Map<Category,Integer> getOrderCategoryList(){
-        Map<Category,Integer> result = new HashMap<>();
+    public Map<Category, Integer> getOrderCategoryList() {
+        Map<Category, Integer> result = new HashMap<>();
         for (Map.Entry<MenuItem, Integer> entry : orderMenu.entrySet()) {
-            result.merge(Menu.findCategory(entry.getKey()),entry.getValue(),Integer::sum);
+            result.merge(Menu.findCategory(entry.getKey()), entry.getValue(), Integer::sum);
         }
         return result;
     }
 
-    private void updateOrderMenu(Map<String, Integer> orderMenus){ //메뉴 업데이트
+    private void updateOrderMenu(Map<String, Integer> orderMenus) { //메뉴 업데이트
         for (Map.Entry<String, Integer> entry : orderMenus.entrySet()) {
-            orderMenu.put(Menu.findMenuItem(entry.getKey()),entry.getValue());
+            orderMenu.put(Menu.findMenuItem(entry.getKey()), entry.getValue());
         }
     }
 
-    public Map<MenuItem,Integer> getOrderMenu(){
+    public Map<MenuItem, Integer> getOrderMenu() {
         return orderMenu;
     }
 
@@ -50,9 +49,5 @@ public class OrderMenuManager {
                 .mapToInt(Map.Entry::getValue)
                 .sum();
     }
-
-
-
-
 
 }

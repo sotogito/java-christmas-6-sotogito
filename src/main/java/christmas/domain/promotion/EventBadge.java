@@ -16,12 +16,12 @@ public enum EventBadge {
         this.minimumAmount = minimumAmount;
     }
 
-    public String getBadgeType(){
+    public String getBadgeType() {
         return badgeType;
     }
 
-    public static String getEventBadge(int totalDiscountAmount){
-        if(totalDiscountAmount >= MoneyManager.MIN_AMOUNT){
+    public static String getEventBadge(int totalDiscountAmount) {
+        if (totalDiscountAmount >= MoneyManager.MIN_AMOUNT) {
             return getBadge(totalDiscountAmount).badgeType;
         }
         return NOTHING.getBadgeType();

@@ -1,11 +1,11 @@
 package christmas.domain.manager;
+
 import christmas.domain.promotion.policy.DailyDiscountItem;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class ScheduleManager {
-
     private static final int YEAR = 2023;
     private static final int MONTH = 12;
     private static final int D_DAY_DISCOUNT_MIN = 1;
@@ -18,7 +18,7 @@ public class ScheduleManager {
         this.visitDate = visitDate;
     }
 
-    public int getVisitDate(){
+    public int getVisitDate() {
         return visitDate;
     }
 
@@ -42,6 +42,5 @@ public class ScheduleManager {
     public boolean isWithinRangeDate() {
         return visitDate >= D_DAY_DISCOUNT_MIN && visitDate <= D_DAY_DISCOUNT_MAX;
     }
-
 
 }

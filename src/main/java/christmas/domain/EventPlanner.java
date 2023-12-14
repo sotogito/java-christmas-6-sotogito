@@ -18,17 +18,17 @@ import java.util.Map;
 
 public class EventPlanner {
 
-    private static final Map<DiscountType,Integer> discountList = new EnumMap<>(DiscountType.class);
+    private static final Map<DiscountType, Integer> discountList = new EnumMap<>(DiscountType.class);
 
-    public EventPlanner(MoneyManager moneyManager,ScheduleManager scheduleManager, OrderMenuManager orderMenuManager) {
+    public EventPlanner(MoneyManager moneyManager, ScheduleManager scheduleManager, OrderMenuManager orderMenuManager) {
 
-        if(moneyManager.isAmountAboveMinimum()){
-            calculateDiscount(scheduleManager,orderMenuManager);
+        if (moneyManager.isAmountAboveMinimum()) {
+            calculateDiscount(scheduleManager, orderMenuManager);
             updateComplimentaryItemToList(moneyManager.getOrderAmount());
         }
     }
 
-    private void calculateDiscount(ScheduleManager scheduleManager, OrderMenuManager orderMenuManager){
+    private void calculateDiscount(ScheduleManager scheduleManager, OrderMenuManager orderMenuManager) {
         DailyDiscountItem dailyDiscountItem = scheduleManager.getDayOfWeek();
 
         if (scheduleManager.isWithinRangeDate()) {
@@ -44,14 +44,16 @@ public class EventPlanner {
         }
     }
 
-    private int calculateChristmasDDay(ScheduleManager scheduleManager){
+
+
+    private int calculateChristmasDDay(ScheduleManager scheduleManager) {
         DiscountCalculator discountCalculator = new ChristmasDDayCalculator();
         int discountConstant = scheduleManager.calculateDDay();
 
         return discountCalculator.calculate(discountConstant);
     }
 
-    private int calculateWeekday(OrderMenuManager orderMenuManager){
+    private int calculateWeekday(OrderMenuManager orderMenuManager) {
         DiscountCalculator discountCalculator = new WeekdayCalculator();
         int discountConstant = orderMenuManager.findCategoryCount(WeekdayCalculator.DISCOUNT_CATEGORY);
 
@@ -59,34 +61,34 @@ public class EventPlanner {
 
     }
 
-    private int calculateWeekend(OrderMenuManager orderMenuManager){
+    private int calculateWeekend(OrderMenuManager orderMenuManager) {
         DiscountCalculator discountCalculator = new WeekendCalculator();
         int discountConstant = orderMenuManager.findCategoryCount(WeekendCalculator.DISCOUNT_CATEGORY);
 
         return discountCalculator.calculate(discountConstant);
     }
 
-    private int calculateSpecial(){
+    private int calculateSpecial() {
         DiscountCalculator discountCalculator = new SpecialCalculator();
 
         return discountCalculator.calculate(SpecialCalculator.CONSTANT);
     }
 
-    public void updateComplimentaryItemToList(int amount){
-        if(ComplimentaryItem.isGetItem(amount)){
+    public void updateComplimentaryItemToList(int amount) {
+        if (ComplimentaryItem.isGetItem(amount)) {
 
             String item = ComplimentaryItem.findItem(amount).getItem();
             int price = Menu.findMenuPrice(Menu.findMenuItem(item));
-            discountList.put(DiscountType.COMPLIMENTARY_ITEM,price);
+            discountList.put(DiscountType.COMPLIMENTARY_ITEM, price);
         }
     }
 
 
-    public Map<DiscountType,Integer> getDiscountList(){
+    public Map<DiscountType, Integer> getDiscountList() {
         return discountList;
     }
 
-    public int getDiscountAmount(){
+    public int getDiscountAmount() {
         return discountList.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum();
@@ -98,7 +100,5 @@ public class EventPlanner {
                 .mapToInt(entry -> entry.getValue())
                 .sum();
     }
-
-
 
 }

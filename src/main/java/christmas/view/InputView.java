@@ -14,29 +14,30 @@ public class InputView {
     private static final String ERROR_VISIT_DATE = "유효하지 않은 날짜입니다. 다시 입력해 주세요.\n";
     public static final String ERROR_ORDER_MENU = "유효하지 않은 주문입니다. 다시 입력해 주세요.\n";
 
-    public static void startPrintEventPlanner(){
+    public static void startPrintEventPlanner() {
         System.out.print(START_EVENT_PLANNER);
     }
-    public static void startInputVisitDate(){
+
+    public static void startInputVisitDate() {
         System.out.print(INPUT_VISIT_DATE);
     }
 
-    public static void startInputOrderMenu(){
+    public static void startInputOrderMenu() {
         System.out.print(INPUT_ORDER_MENU);
     }
 
-    public static int inputVisitDate(){
-        try{
+    public static int inputVisitDate() {
+        try {
             return Integer.parseInt(Console.readLine());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(ERROR_VISIT_DATE);
         }
     }
 
-    public static Map<String,Integer> inputOrderMenu(){
-        try{
+    public static Map<String, Integer> inputOrderMenu() {
+        try {
             return InputConverter.parseMenu(Console.readLine());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(ERROR_ORDER_MENU);
         }
     }

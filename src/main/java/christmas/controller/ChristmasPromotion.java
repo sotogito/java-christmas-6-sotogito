@@ -18,25 +18,30 @@ public class ChristmasPromotion {
         InputView.startPrintEventPlanner();
         InputView.startInputVisitDate();
         ScheduleManager scheduleManager = createScheduleManager();
-        //날짜
+
         InputView.startInputOrderMenu();
         OrderMenuManager orderMenuManager = createOrderMenuManager();
-        //메뉴
-        MoneyManager moneyManager = createMoneyManager(orderMenuManager);
-        //돈
-        sendVisitDate(scheduleManager);
-        sendOrderMenuList(orderMenuManager);
 
+        MoneyManager moneyManager = createMoneyManager(orderMenuManager);
         EventPlanner eventPlanner = createEventPlanner(moneyManager, scheduleManager, orderMenuManager);
 
+        eventPlanPrinter(scheduleManager, moneyManager, orderMenuManager, eventPlanner);
+    }
+
+    private void eventPlanPrinter(
+            ScheduleManager scheduleManager,
+            MoneyManager moneyManager,
+            OrderMenuManager orderMenuManager,
+            EventPlanner eventPlanner) {
+
+        sendVisitDate(scheduleManager);
+        sendOrderMenuList(orderMenuManager);
         sendTotalOrderAmountBeforeDiscount(moneyManager);
         sendComplimentaryItem(moneyManager);
         sendDiscountList(eventPlanner, moneyManager);
         sendTotalDiscountAmount(eventPlanner);
         sendEstimatedPaymentAfterDiscount(moneyManager, eventPlanner);
         sendEventBadge(moneyManager);
-
-
     }
 
     private void sendEventBadge(MoneyManager moneyManager) {
@@ -49,13 +54,11 @@ public class ChristmasPromotion {
 
         int result = moneyManager.totalAmountAfterDiscount(eventPlanner.getDiscountAmountForCalculate());
         OutputView.printEstimatedPaymentAfterDiscount(result);
-
     }
 
     private void sendTotalDiscountAmount(EventPlanner eventPlanner) {
         OutputView.startTotalDiscountAmount();
         OutputView.printTotalDiscountAmount(eventPlanner.getDiscountAmount());
-
     }
 
     private void sendComplimentaryItem(MoneyManager moneyManager) {
@@ -63,11 +66,11 @@ public class ChristmasPromotion {
         String item = ComplimentaryItem.findItem(moneyManager.getOrderAmount()).getItem();
         int quantity = ComplimentaryItem.findQuantity(item);
 
-        if(quantity == 0){
+        if (quantity == 0) {
             OutputView.printNothing();
             return;
         }
-        OutputView.printComplimentaryItem(item,quantity);
+        OutputView.printComplimentaryItem(item, quantity);
     }
 
     private void sendTotalOrderAmountBeforeDiscount(MoneyManager moneyManager) {
@@ -77,17 +80,13 @@ public class ChristmasPromotion {
 
     private void sendDiscountList(EventPlanner eventPlanner, MoneyManager moneyManager) {
         OutputView.startPrintDiscountList();
-        if(eventPlanner.getDiscountList().isEmpty()){
+        if (eventPlanner.getDiscountList().isEmpty()) {
             OutputView.printNothing();
             return;
         }
         for (Map.Entry<DiscountType, Integer> entry : eventPlanner.getDiscountList().entrySet()) {
             OutputView.printDiscountList(entry.getKey().getName(), entry.getValue());
         }
-    }
-
-    private EventPlanner createEventPlanner(MoneyManager moneyManager, ScheduleManager scheduleManager, OrderMenuManager orderMenuManager) {
-        return new EventPlanner(moneyManager, scheduleManager, orderMenuManager);
     }
 
     private void sendOrderMenuList(OrderMenuManager orderMenuManager) {
@@ -100,12 +99,16 @@ public class ChristmasPromotion {
         }
     }
 
-    private MoneyManager createMoneyManager(OrderMenuManager orderMenuManager) {
-        return new MoneyManager(orderMenuManager.getOrderTotalAmount());
-    }
-
     private void sendVisitDate(ScheduleManager scheduleManager) {
         OutputView.printVisitDate(scheduleManager.getVisitDate());
+    }
+
+    private EventPlanner createEventPlanner(MoneyManager moneyManager, ScheduleManager scheduleManager, OrderMenuManager orderMenuManager) {
+        return new EventPlanner(moneyManager, scheduleManager, orderMenuManager);
+    }
+
+    private MoneyManager createMoneyManager(OrderMenuManager orderMenuManager) {
+        return new MoneyManager(orderMenuManager.getOrderTotalAmount());
     }
 
     private OrderMenuManager createOrderMenuManager() {
@@ -115,7 +118,6 @@ public class ChristmasPromotion {
             OutputView.printErrorMessage(e.getMessage());
             return createOrderMenuManager();
         }
-
     }
 
     private ScheduleManager createScheduleManager() {
@@ -125,6 +127,6 @@ public class ChristmasPromotion {
             OutputView.printErrorMessage(e.getMessage());
             return createScheduleManager();
         }
-
     }
+
 }
