@@ -16,25 +16,18 @@ public class ChristmasPromotion {
         InputView.startPrintEventPlanner();
         InputView.startInputVisitDate();
         ScheduleManager scheduleManager = createScheduleManager();
-
+            //날자
         InputView.startInputOrderMenu();
         OrderMenuManager orderMenuManager = createOrderMenuManager();
-
-        for (Map.Entry<MenuItem, Integer> entry : orderMenuManager.getOrderMenu().entrySet()) {
-            System.out.println(entry.getKey().getName()+"메뉴 이름");
-            System.out.println(entry.getKey().getPrice()+"가격");
-            System.out.println(entry.getValue()+"수량");
-        }
-
-        for (Map.Entry<Category, Integer> entry : orderMenuManager.getOrderCategoryList().entrySet()) {
-            System.out.println(entry.getKey().getName()+"카테고리 이름");
-            System.out.println(entry.getValue()+"수량");
-        }
-
-        System.out.println(orderMenuManager.getOrderTotalAmount());
+            //메뉴
+        sendVisitDate(scheduleManager);
 
 
 
+    }
+
+    private void sendVisitDate(ScheduleManager scheduleManager){
+        OutputView.printVisitDate(scheduleManager.getVisitDate());
     }
 
     private OrderMenuManager createOrderMenuManager(){
