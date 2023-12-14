@@ -1,9 +1,8 @@
 package christmas.controller;
 
+import christmas.domain.*;
 import christmas.domain.Menu;
 import christmas.domain.MenuItem;
-import christmas.domain.OrderMenuManager;
-import christmas.domain.ScheduleManager;
 import christmas.enums.Category;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -16,14 +15,20 @@ public class ChristmasPromotion {
         InputView.startPrintEventPlanner();
         InputView.startInputVisitDate();
         ScheduleManager scheduleManager = createScheduleManager();
-            //날자
+            //날짜
         InputView.startInputOrderMenu();
         OrderMenuManager orderMenuManager = createOrderMenuManager();
             //메뉴
+        MoneyManager moneyManager = createMoneyManager(orderMenuManager);
+            //돈
         sendVisitDate(scheduleManager);
 
 
 
+    }
+
+    private MoneyManager createMoneyManager(OrderMenuManager orderMenuManager){
+        return new MoneyManager(orderMenuManager.getOrderTotalAmount());
     }
 
     private void sendVisitDate(ScheduleManager scheduleManager){

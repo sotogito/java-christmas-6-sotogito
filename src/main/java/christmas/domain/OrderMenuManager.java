@@ -11,6 +11,8 @@ public class OrderMenuManager {
 
     public OrderMenuManager(Map<String, Integer> orderMenus) {
         updateOrderMenu(orderMenus);
+        //음료만 들어있는지 유효검사getOrderCategoryList()로
+        //총 주문이 10000이 넘는지
     }
 
 
