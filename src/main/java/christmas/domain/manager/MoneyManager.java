@@ -2,7 +2,7 @@ package christmas.domain.manager;
 
 public class MoneyManager {
 
-    private static final int MIN_AMOUNT = 10000;
+    public static final int MIN_AMOUNT = 10000;
     private int orderAmount;
 
     public MoneyManager(int orderAmount) {

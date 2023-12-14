@@ -1,5 +1,6 @@
 package christmas.domain.interfaces;
 
+import christmas.domain.Menu;
 import christmas.domain.MenuItem;
 import christmas.domain.interfaces.calculate.ChristmasDDayCalculator;
 import christmas.domain.interfaces.calculate.SpecialCalculator;
@@ -23,8 +24,16 @@ public class EventPlanner {
     private static final Map<DiscountType,Integer> discountList = new EnumMap<>(DiscountType.class);
 
     public EventPlanner(MoneyManager moneyManager,ScheduleManager scheduleManager, OrderMenuManager orderMenuManager) {
+
+        if(moneyManager.isAmountAboveMinimum()){
+            calculateDiscount(scheduleManager,orderMenuManager);
+            updateComplimentaryItemToList(moneyManager.getOrderAmount());
+        }
+    }
+
+    private void calculateDiscount(ScheduleManager scheduleManager, OrderMenuManager orderMenuManager){
         DailyDiscountItem dailyDiscountItem = scheduleManager.getDayOfWeek();
-        //일단 구매 금액이 10000원이 넘는지 확인
+
         if (scheduleManager.isWithinRangeDate()) {
             discountList.put(DiscountType.CHRISTMAS_D_DAY, calculateChristmasDDay(scheduleManager));
         }
@@ -36,7 +45,6 @@ public class EventPlanner {
         if (dailyDiscountItem.getSpecial()) {
             discountList.put(DiscountType.SPECIAL, calculateSpecial());
         }
-        updateComplimentaryItemToList(moneyManager.getOrderAmount());
     }
 
     private int calculateChristmasDDay(ScheduleManager scheduleManager){
@@ -69,9 +77,13 @@ public class EventPlanner {
 
     public void updateComplimentaryItemToList(int amount){
         if(ComplimentaryItem.isGetItem(amount)){
-            discountList.put(DiscountType.COMPLIMENTARY_ITEM,ComplimentaryItem.CHAMPAGNE.getItemPrice());
+
+            String item = ComplimentaryItem.findItem(amount).getItem();
+            int price = Menu.findMenuPrice(Menu.findMenuItem(item));
+            discountList.put(DiscountType.COMPLIMENTARY_ITEM,price);
         }
     }
+
 
     public Map<DiscountType,Integer> getDiscountList(){
         return discountList;

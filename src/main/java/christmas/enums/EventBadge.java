@@ -1,5 +1,7 @@
 package christmas.enums;
 
+import christmas.domain.manager.MoneyManager;
+
 public enum EventBadge {
     STAR("별", 5000),
     TREE("트리", 10000),
@@ -17,6 +19,14 @@ public enum EventBadge {
     public String getBadgeType(){
         return badgeType;
     }
+
+    public static String getEventBadge(int totalDiscountAmount){
+        if(totalDiscountAmount >= MoneyManager.MIN_AMOUNT){
+            return getBadge(totalDiscountAmount).badgeType;
+        }
+        return NOTHING.getBadgeType();
+    }
+
 
     public static EventBadge getBadge(int totalDiscountAmount) {
         if (totalDiscountAmount >= SANTA.minimumAmount) {

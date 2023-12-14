@@ -69,6 +69,10 @@ public class OutputView {
     }
 
     public static void printTotalDiscountAmount(int amount){
+        if(amount == 0){
+            System.out.printf(PRICE,amount);
+            return;
+        }
         System.out.printf(DISCOUNT_PRICE,amount);
     }
 

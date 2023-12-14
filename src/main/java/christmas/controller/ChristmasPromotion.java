@@ -14,43 +14,37 @@ import christmas.view.OutputView;
 import java.util.Map;
 
 public class ChristmasPromotion {
-    public void run(){
+    public void run() {
         InputView.startPrintEventPlanner();
         InputView.startInputVisitDate();
         ScheduleManager scheduleManager = createScheduleManager();
-            //날짜
+        //날짜
         InputView.startInputOrderMenu();
         OrderMenuManager orderMenuManager = createOrderMenuManager();
-            //메뉴
+        //메뉴
         MoneyManager moneyManager = createMoneyManager(orderMenuManager);
-            //돈
+        //돈
         sendVisitDate(scheduleManager);
         sendOrderMenuList(orderMenuManager);
 
-        EventPlanner eventPlanner = createEventPlanner(moneyManager ,scheduleManager,orderMenuManager);
+        EventPlanner eventPlanner = createEventPlanner(moneyManager, scheduleManager, orderMenuManager);
 
         sendTotalOrderAmountBeforeDiscount(moneyManager);
         sendComplimentaryItem(moneyManager);
-        sendDiscountList(eventPlanner,moneyManager);
+        sendDiscountList(eventPlanner, moneyManager);
         sendTotalDiscountAmount(eventPlanner);
-        sendEstimatedPaymentAfterDiscount(moneyManager,eventPlanner);
-        sendEventBadge(moneyManager,eventPlanner);
+        sendEstimatedPaymentAfterDiscount(moneyManager, eventPlanner);
+        sendEventBadge(moneyManager);
 
 
     }
 
-    private void sendEventBadge(MoneyManager moneyManager,EventPlanner eventPlanner){
+    private void sendEventBadge(MoneyManager moneyManager) {
         OutputView.startPrintEventBadge();
-
-        if(moneyManager.isAmountAboveMinimum()){
-            EventBadge eventBadge = EventBadge.getBadge(eventPlanner.getDiscountAmount());
-            OutputView.printEventBadge(eventBadge.getBadgeType());
-        } else if (!moneyManager.isAmountAboveMinimum()) {
-            OutputView.printNothing();
-        }
+        OutputView.printEventBadge(EventBadge.getEventBadge(moneyManager.getOrderAmount()));
     }
 
-    private void sendEstimatedPaymentAfterDiscount(MoneyManager moneyManager,EventPlanner eventPlanner){
+    private void sendEstimatedPaymentAfterDiscount(MoneyManager moneyManager, EventPlanner eventPlanner) {
         OutputView.startPrintEstimatedPaymentAfterDiscount();
 
         int result = moneyManager.totalAmountAfterDiscount(eventPlanner.getDiscountAmountForCalculate());
@@ -64,71 +58,73 @@ public class ChristmasPromotion {
 
     }
 
-    private void sendComplimentaryItem(MoneyManager moneyManager){
+    private void sendComplimentaryItem(MoneyManager moneyManager) {
         OutputView.startPrintComplimentaryItem();
-        if(ComplimentaryItem.isGetItem(moneyManager.getOrderAmount())){
-            OutputView.printComplimentaryItem(
-                    ComplimentaryItem.CHAMPAGNE.getItem(), ComplimentaryItem.CHAMPAGNE.getQuantity());
-        }else if(!ComplimentaryItem.isGetItem(moneyManager.getOrderAmount())){
+        String item = ComplimentaryItem.findItem(moneyManager.getOrderAmount()).getItem();
+        int quantity = ComplimentaryItem.findQuantity(item);
+
+        if(quantity == 0){
             OutputView.printNothing();
+            return;
         }
+        OutputView.printComplimentaryItem(item,quantity);
     }
 
-    private void sendTotalOrderAmountBeforeDiscount(MoneyManager moneyManager){
+    private void sendTotalOrderAmountBeforeDiscount(MoneyManager moneyManager) {
         OutputView.startPrintTotalOrderAmountBeforeDiscount();
         OutputView.printTotalOrderAmountBeforeDiscount(moneyManager.getOrderAmount());
     }
 
-    private void sendDiscountList(EventPlanner eventPlanner, MoneyManager moneyManager){
+    private void sendDiscountList(EventPlanner eventPlanner, MoneyManager moneyManager) {
         OutputView.startPrintDiscountList();
-
-        if(moneyManager.isAmountAboveMinimum()){
-            for (Map.Entry<DiscountType,Integer> entry : eventPlanner.getDiscountList().entrySet()) {
-                OutputView.printDiscountList(entry.getKey().getName(),entry.getValue());
-            }
-        } else if(!moneyManager.isAmountAboveMinimum()){
+        if(eventPlanner.getDiscountList().isEmpty()){
             OutputView.printNothing();
+            return;
+        }
+        for (Map.Entry<DiscountType, Integer> entry : eventPlanner.getDiscountList().entrySet()) {
+            OutputView.printDiscountList(entry.getKey().getName(), entry.getValue());
         }
     }
 
-    private EventPlanner createEventPlanner(MoneyManager moneyManager,ScheduleManager scheduleManager, OrderMenuManager orderMenuManager){
-        return new EventPlanner(moneyManager,scheduleManager,orderMenuManager);
+    private EventPlanner createEventPlanner(MoneyManager moneyManager, ScheduleManager scheduleManager, OrderMenuManager orderMenuManager) {
+        return new EventPlanner(moneyManager, scheduleManager, orderMenuManager);
     }
 
-    private void sendOrderMenuList(OrderMenuManager orderMenuManager){
+    private void sendOrderMenuList(OrderMenuManager orderMenuManager) {
         OutputView.startPrintOrderMenu();
 
-        for (Map.Entry<MenuItem,Integer> entry : orderMenuManager.getOrderMenu().entrySet()) {
+        for (Map.Entry<MenuItem, Integer> entry : orderMenuManager.getOrderMenu().entrySet()) {
             String menuName = entry.getKey().getName();
             int count = entry.getValue();
-            OutputView.printOrderMenu(menuName,count);
+            OutputView.printOrderMenu(menuName, count);
         }
     }
 
-    private MoneyManager createMoneyManager(OrderMenuManager orderMenuManager){
+    private MoneyManager createMoneyManager(OrderMenuManager orderMenuManager) {
         return new MoneyManager(orderMenuManager.getOrderTotalAmount());
     }
 
-    private void sendVisitDate(ScheduleManager scheduleManager){
+    private void sendVisitDate(ScheduleManager scheduleManager) {
         OutputView.printVisitDate(scheduleManager.getVisitDate());
     }
 
-    private OrderMenuManager createOrderMenuManager(){
-        try{
+    private OrderMenuManager createOrderMenuManager() {
+        try {
             return new OrderMenuManager(InputView.inputOrderMenu());
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return createOrderMenuManager();
         }
 
     }
 
-    private ScheduleManager createScheduleManager(){
-        try{
+    private ScheduleManager createScheduleManager() {
+        try {
             return new ScheduleManager(InputView.inputVisitDate());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return createScheduleManager();
         }
+
     }
 }
