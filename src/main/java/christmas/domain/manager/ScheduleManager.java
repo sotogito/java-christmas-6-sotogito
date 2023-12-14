@@ -1,5 +1,5 @@
 package christmas.domain.manager;
-import christmas.enums.DailyDiscountItem;
+import christmas.domain.promotion.policy.DailyDiscountItem;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

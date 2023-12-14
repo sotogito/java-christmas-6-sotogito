@@ -1,6 +1,4 @@
-package christmas.domain.interfaces.calculate;
-
-import christmas.domain.interfaces.DiscountCalculator;
+package christmas.domain.promotion.calculators;
 
 public class ChristmasDDayCalculator implements DiscountCalculator {
     private static final int BASE_DISCOUNT_AMOUNT = 1000;

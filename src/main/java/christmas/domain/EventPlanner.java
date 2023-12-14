@@ -1,22 +1,19 @@
-package christmas.domain.interfaces;
+package christmas.domain;
 
-import christmas.domain.Menu;
-import christmas.domain.MenuItem;
-import christmas.domain.interfaces.calculate.ChristmasDDayCalculator;
-import christmas.domain.interfaces.calculate.SpecialCalculator;
-import christmas.domain.interfaces.calculate.WeekdayCalculator;
-import christmas.domain.interfaces.calculate.WeekendCalculator;
+import christmas.domain.promotion.calculators.DiscountCalculator;
+import christmas.domain.rastaurant.Menu;
+import christmas.domain.promotion.calculators.ChristmasDDayCalculator;
+import christmas.domain.promotion.calculators.SpecialCalculator;
+import christmas.domain.promotion.calculators.WeekdayCalculator;
+import christmas.domain.promotion.calculators.WeekendCalculator;
 import christmas.domain.manager.MoneyManager;
 import christmas.domain.manager.OrderMenuManager;
 import christmas.domain.manager.ScheduleManager;
-import christmas.enums.Category;
-import christmas.enums.ComplimentaryItem;
-import christmas.enums.DailyDiscountItem;
-import christmas.enums.DiscountType;
+import christmas.domain.promotion.ComplimentaryItem;
+import christmas.domain.promotion.policy.DailyDiscountItem;
+import christmas.domain.promotion.policy.DiscountType;
 
-import java.util.Collection;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 public class EventPlanner {

@@ -1,4 +1,4 @@
-package christmas.enums;
+package christmas.domain.promotion;
 
 import christmas.domain.manager.MoneyManager;
 

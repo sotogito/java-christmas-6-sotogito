@@ -1,8 +1,8 @@
 package christmas.domain.manager;
 
-import christmas.domain.Menu;
-import christmas.domain.MenuItem;
-import christmas.enums.Category;
+import christmas.domain.rastaurant.Menu;
+import christmas.domain.rastaurant.MenuItem;
+import christmas.domain.rastaurant.Category;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

@@ -1,7 +1,5 @@
 package christmas.view;
 
-import christmas.enums.DiscountType;
-
 public class OutputView {
 
     public static final String HEADING_TEMPLATE = "\n<%s>\n";

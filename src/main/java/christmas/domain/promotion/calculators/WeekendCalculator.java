@@ -1,7 +1,6 @@
-package christmas.domain.interfaces.calculate;
+package christmas.domain.promotion.calculators;
 
-import christmas.domain.interfaces.DiscountCalculator;
-import christmas.enums.Category;
+import christmas.domain.rastaurant.Category;
 
 public class WeekendCalculator implements DiscountCalculator {
     private static final int DISCOUNT_AMOUNT = 2023;

@@ -1,6 +1,5 @@
-package christmas.domain;
+package christmas.domain.rastaurant;
 
-import christmas.enums.Category;
 import christmas.view.InputView;
 
 import java.util.ArrayList;

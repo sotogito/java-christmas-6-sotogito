@@ -1,7 +1,4 @@
-package christmas.domain.interfaces.calculate;
-
-import christmas.domain.interfaces.DiscountCalculator;
-import christmas.enums.Category;
+package christmas.domain.promotion.calculators;
 
 public class SpecialCalculator implements DiscountCalculator {
     private static final int DISCOUNT_AMOUNT = 1000;

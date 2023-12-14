@@ -1,6 +1,4 @@
-package christmas.enums;
-
-import christmas.domain.Menu;
+package christmas.domain.promotion;
 
 import java.util.Arrays;
 import java.util.Comparator;
