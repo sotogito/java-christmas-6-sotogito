@@ -44,6 +44,13 @@ public class OrderMenuManager {
         return orderMenu;
     }
 
+    public int findCategoryCount(Category category) {
+        return orderMenu.entrySet().stream()
+                .filter(entry -> Menu.findCategory(entry.getKey()) == category)
+                .mapToInt(Map.Entry::getValue)
+                .sum();
+    }
+
 
 
 

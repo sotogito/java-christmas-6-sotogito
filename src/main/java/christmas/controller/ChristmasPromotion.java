@@ -1,9 +1,11 @@
 package christmas.controller;
 
 import christmas.domain.MenuItem;
+import christmas.domain.interfaces.EventPlanner;
 import christmas.domain.manager.MoneyManager;
 import christmas.domain.manager.OrderMenuManager;
 import christmas.domain.manager.ScheduleManager;
+import christmas.enums.DiscountType;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -22,6 +24,15 @@ public class ChristmasPromotion {
             //돈
         sendVisitDate(scheduleManager);
         sendOrderMenuList(orderMenuManager);
+
+        EventPlanner eventPlanner = new EventPlanner();
+        eventPlanner.calculateDiscount(moneyManager,scheduleManager,orderMenuManager);
+
+
+        for (Map.Entry<DiscountType,Integer> entry : eventPlanner.getDiscountList().entrySet()) {
+            System.out.println(entry.getKey().getName());
+            System.out.println(entry.getValue());
+        }
 
 
 
