@@ -12,6 +12,7 @@ public class InputView {
     private static final String INPUT_ORDER_MENU = "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)\n";
 
     private static final String ERROR_VISIT_DATE = "유효하지 않은 날짜입니다. 다시 입력해 주세요.\n";
+    public static final String ERROR_ORDER_MENU = "유효하지 않은 주문입니다. 다시 입력해 주세요.\n";
 
     public static void startPrintEventPlanner(){
         System.out.print(START_EVENT_PLANNER);
@@ -36,7 +37,7 @@ public class InputView {
         try{
             return InputConverter.parseMenu(Console.readLine());
         }catch (IllegalArgumentException e){
-            throw new IllegalArgumentException(ERROR_VISIT_DATE);
+            throw new IllegalArgumentException(ERROR_ORDER_MENU);
         }
     }
 

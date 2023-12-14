@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import christmas.enums.Category;
+import christmas.view.InputView;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -39,6 +40,31 @@ public class Menu {
     }
     public static List<MenuItem> getBeverage(){
         return BEVERAGE;
+    }
+
+    public static MenuItem findMenuItem(String orderMenuName) {
+        return menuItemList.values().stream()
+                .flatMap(List::stream)
+                .filter(item -> item.getName().equals(orderMenuName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(InputView.ERROR_ORDER_MENU));
+    }
+
+    public static int findMenuPrice(MenuItem menuItem) {
+        return menuItemList.values().stream()
+                .flatMap(List::stream)
+                .filter(item -> item.getName().equals(menuItem.getName()))
+                .findFirst()
+                .map(MenuItem::getPrice)
+                .orElseThrow(() -> new IllegalArgumentException(InputView.ERROR_ORDER_MENU));
+    }
+
+    public static Category findCategory(MenuItem menuItem) {
+        return menuItemList.entrySet().stream()
+                .filter(entry -> entry.getValue().contains(menuItem))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("MenuItem does not belong to any category"));
     }
 
 }
